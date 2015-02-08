@@ -33,7 +33,7 @@ namespace DisabilityServiceDatabase
         public int EmployeeNumber;
         public String Status;
         public Boolean LTDEligible;
-        public DateTime ReferralRecieved;
+        public DateTime ReferralReceived;
         public DateTime SickLeaveStart;
         public DateTime SickLeaveExpiry;
         public DateTime n180FollowUp;

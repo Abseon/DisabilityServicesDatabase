@@ -37,48 +37,48 @@
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTab = new System.Windows.Forms.TabControl();
             this.FirstNameField = new System.Windows.Forms.TabPage();
-            this.SubmitEntryButton = new System.Windows.Forms.Button();
-            this.DailyHoursWorkedField = new System.Windows.Forms.TextBox();
-            this.DailyHoursWorkedLabel = new System.Windows.Forms.Label();
-            this.HourlySalaryField = new System.Windows.Forms.TextBox();
-            this.HourlySalaryLabel = new System.Windows.Forms.Label();
-            this.StartDateField = new System.Windows.Forms.DateTimePicker();
-            this.StartDateLabel = new System.Windows.Forms.Label();
-            this.ReferralRecievedField = new System.Windows.Forms.DateTimePicker();
-            this.ReferralRecievedLabel = new System.Windows.Forms.Label();
-            this.LTDEligibleField = new System.Windows.Forms.CheckBox();
-            this.LTDEligibleLabel = new System.Windows.Forms.Label();
-            this.StatusField = new System.Windows.Forms.ComboBox();
+            this.RTWInformationTable = new System.Windows.Forms.TableLayoutPanel();
             this.StatusLabel = new System.Windows.Forms.Label();
-            this.RTWInformationLabel = new System.Windows.Forms.Label();
-            this.PersonalInformationLabel = new System.Windows.Forms.Label();
+            this.StatusField = new System.Windows.Forms.ComboBox();
+            this.LTDEligibleLabel = new System.Windows.Forms.Label();
+            this.DailyHoursWorkedField = new System.Windows.Forms.TextBox();
+            this.LTDEligibleField = new System.Windows.Forms.CheckBox();
+            this.DailyHoursWorkedLabel = new System.Windows.Forms.Label();
+            this.ReferralReceivedLabel = new System.Windows.Forms.Label();
+            this.HourlySalaryField = new System.Windows.Forms.TextBox();
+            this.ReferralReceivedField = new System.Windows.Forms.DateTimePicker();
+            this.HourlySalaryLabel = new System.Windows.Forms.Label();
+            this.StartDateLabel = new System.Windows.Forms.Label();
+            this.StartDateField = new System.Windows.Forms.DateTimePicker();
+            this.PersonalInformationTable = new System.Windows.Forms.TableLayoutPanel();
+            this.EmployeeNumberLabel = new System.Windows.Forms.Label();
+            this.EmployeeNumberField = new System.Windows.Forms.TextBox();
+            this.FirstNameLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.LastNameLabel = new System.Windows.Forms.Label();
+            this.LastNameField = new System.Windows.Forms.TextBox();
+            this.CityLabel = new System.Windows.Forms.Label();
+            this.CityField = new System.Windows.Forms.TextBox();
+            this.ProvinceLabel = new System.Windows.Forms.Label();
+            this.ProvinceField = new System.Windows.Forms.ComboBox();
+            this.PostalCodeLabel = new System.Windows.Forms.Label();
+            this.PostalCodeField = new System.Windows.Forms.TextBox();
+            this.HomeNumberLabel = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.WorkNumberLabel = new System.Windows.Forms.Label();
+            this.WorkNumberField = new System.Windows.Forms.TextBox();
             this.EmailField = new System.Windows.Forms.TextBox();
             this.EmailLabel = new System.Windows.Forms.Label();
-            this.WorkNumberLabel = new System.Windows.Forms.Label();
-            this.HomeNumberLabel = new System.Windows.Forms.Label();
-            this.PostalCodeLabel = new System.Windows.Forms.Label();
-            this.ProvinceLabel = new System.Windows.Forms.Label();
-            this.CityLabel = new System.Windows.Forms.Label();
-            this.LastNameLabel = new System.Windows.Forms.Label();
-            this.FirstNameLabel = new System.Windows.Forms.Label();
-            this.EmployeeNumberLabel = new System.Windows.Forms.Label();
+            this.SubmitEntryButton = new System.Windows.Forms.Button();
+            this.RTWInformationLabel = new System.Windows.Forms.Label();
+            this.PersonalInformationLabel = new System.Windows.Forms.Label();
             this.ReportsTab = new System.Windows.Forms.TabPage();
             this.NotificationsTab = new System.Windows.Forms.TabPage();
-            this.PersonalInformationTable = new System.Windows.Forms.TableLayoutPanel();
-            this.WorkNumberField = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.PostalCodeField = new System.Windows.Forms.TextBox();
-            this.ProvinceField = new System.Windows.Forms.ComboBox();
-            this.CityField = new System.Windows.Forms.TextBox();
-            this.LastNameField = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.EmployeeNumberField = new System.Windows.Forms.TextBox();
-            this.RTWInformationTable = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.MainTab.SuspendLayout();
             this.FirstNameField.SuspendLayout();
-            this.PersonalInformationTable.SuspendLayout();
             this.RTWInformationTable.SuspendLayout();
+            this.PersonalInformationTable.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -153,97 +153,44 @@
             this.FirstNameField.Text = "Data Entry";
             this.FirstNameField.UseVisualStyleBackColor = true;
             // 
-            // SubmitEntryButton
+            // RTWInformationTable
             // 
-            this.SubmitEntryButton.Location = new System.Drawing.Point(515, 336);
-            this.SubmitEntryButton.Name = "SubmitEntryButton";
-            this.SubmitEntryButton.Size = new System.Drawing.Size(310, 23);
-            this.SubmitEntryButton.TabIndex = 32;
-            this.SubmitEntryButton.Text = "Submit Entry";
-            this.SubmitEntryButton.UseVisualStyleBackColor = true;
+            this.RTWInformationTable.ColumnCount = 2;
+            this.RTWInformationTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.RTWInformationTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.RTWInformationTable.Controls.Add(this.StatusLabel, 0, 0);
+            this.RTWInformationTable.Controls.Add(this.StatusField, 1, 0);
+            this.RTWInformationTable.Controls.Add(this.LTDEligibleLabel, 0, 1);
+            this.RTWInformationTable.Controls.Add(this.DailyHoursWorkedField, 1, 5);
+            this.RTWInformationTable.Controls.Add(this.LTDEligibleField, 1, 1);
+            this.RTWInformationTable.Controls.Add(this.DailyHoursWorkedLabel, 0, 5);
+            this.RTWInformationTable.Controls.Add(this.ReferralReceivedLabel, 0, 2);
+            this.RTWInformationTable.Controls.Add(this.HourlySalaryField, 1, 4);
+            this.RTWInformationTable.Controls.Add(this.ReferralReceivedField, 1, 2);
+            this.RTWInformationTable.Controls.Add(this.HourlySalaryLabel, 0, 4);
+            this.RTWInformationTable.Controls.Add(this.StartDateLabel, 0, 3);
+            this.RTWInformationTable.Controls.Add(this.StartDateField, 1, 3);
+            this.RTWInformationTable.Location = new System.Drawing.Point(486, 62);
+            this.RTWInformationTable.Name = "RTWInformationTable";
+            this.RTWInformationTable.RowCount = 6;
+            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.RTWInformationTable.Size = new System.Drawing.Size(387, 236);
+            this.RTWInformationTable.TabIndex = 34;
             // 
-            // DailyHoursWorkedField
+            // StatusLabel
             // 
-            this.DailyHoursWorkedField.Location = new System.Drawing.Point(196, 198);
-            this.DailyHoursWorkedField.Name = "DailyHoursWorkedField";
-            this.DailyHoursWorkedField.Size = new System.Drawing.Size(188, 20);
-            this.DailyHoursWorkedField.TabIndex = 31;
-            // 
-            // DailyHoursWorkedLabel
-            // 
-            this.DailyHoursWorkedLabel.AutoSize = true;
-            this.DailyHoursWorkedLabel.Location = new System.Drawing.Point(3, 195);
-            this.DailyHoursWorkedLabel.Name = "DailyHoursWorkedLabel";
-            this.DailyHoursWorkedLabel.Size = new System.Drawing.Size(102, 13);
-            this.DailyHoursWorkedLabel.TabIndex = 30;
-            this.DailyHoursWorkedLabel.Text = "Daily Hours Worked";
-            // 
-            // HourlySalaryField
-            // 
-            this.HourlySalaryField.Location = new System.Drawing.Point(196, 159);
-            this.HourlySalaryField.Name = "HourlySalaryField";
-            this.HourlySalaryField.Size = new System.Drawing.Size(188, 20);
-            this.HourlySalaryField.TabIndex = 29;
-            // 
-            // HourlySalaryLabel
-            // 
-            this.HourlySalaryLabel.AutoSize = true;
-            this.HourlySalaryLabel.Location = new System.Drawing.Point(3, 156);
-            this.HourlySalaryLabel.Name = "HourlySalaryLabel";
-            this.HourlySalaryLabel.Size = new System.Drawing.Size(69, 13);
-            this.HourlySalaryLabel.TabIndex = 28;
-            this.HourlySalaryLabel.Text = "Hourly Salary";
-            // 
-            // StartDateField
-            // 
-            this.StartDateField.Location = new System.Drawing.Point(196, 120);
-            this.StartDateField.Name = "StartDateField";
-            this.StartDateField.Size = new System.Drawing.Size(188, 20);
-            this.StartDateField.TabIndex = 27;
-            // 
-            // StartDateLabel
-            // 
-            this.StartDateLabel.AutoSize = true;
-            this.StartDateLabel.Location = new System.Drawing.Point(3, 117);
-            this.StartDateLabel.Name = "StartDateLabel";
-            this.StartDateLabel.Size = new System.Drawing.Size(55, 13);
-            this.StartDateLabel.TabIndex = 26;
-            this.StartDateLabel.Text = "Start Date";
-            // 
-            // ReferralRecievedField
-            // 
-            this.ReferralRecievedField.Location = new System.Drawing.Point(196, 81);
-            this.ReferralRecievedField.Name = "ReferralRecievedField";
-            this.ReferralRecievedField.Size = new System.Drawing.Size(188, 20);
-            this.ReferralRecievedField.TabIndex = 25;
-            // 
-            // ReferralRecievedLabel
-            // 
-            this.ReferralRecievedLabel.AutoSize = true;
-            this.ReferralRecievedLabel.Location = new System.Drawing.Point(3, 78);
-            this.ReferralRecievedLabel.Name = "ReferralRecievedLabel";
-            this.ReferralRecievedLabel.Size = new System.Drawing.Size(93, 13);
-            this.ReferralRecievedLabel.TabIndex = 24;
-            this.ReferralRecievedLabel.Text = "Referral Recieved";
-            this.ReferralRecievedLabel.Click += new System.EventHandler(this.ReferralRecievedLabel_Click);
-            // 
-            // LTDEligibleField
-            // 
-            this.LTDEligibleField.AutoSize = true;
-            this.LTDEligibleField.Location = new System.Drawing.Point(196, 42);
-            this.LTDEligibleField.Name = "LTDEligibleField";
-            this.LTDEligibleField.Size = new System.Drawing.Size(15, 14);
-            this.LTDEligibleField.TabIndex = 23;
-            this.LTDEligibleField.UseVisualStyleBackColor = true;
-            // 
-            // LTDEligibleLabel
-            // 
-            this.LTDEligibleLabel.AutoSize = true;
-            this.LTDEligibleLabel.Location = new System.Drawing.Point(3, 39);
-            this.LTDEligibleLabel.Name = "LTDEligibleLabel";
-            this.LTDEligibleLabel.Size = new System.Drawing.Size(64, 13);
-            this.LTDEligibleLabel.TabIndex = 22;
-            this.LTDEligibleLabel.Text = "LTD Eligible";
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Location = new System.Drawing.Point(3, 0);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(37, 13);
+            this.StatusLabel.TabIndex = 20;
+            this.StatusLabel.Text = "Status";
             // 
             // StatusField
             // 
@@ -255,141 +202,88 @@
             this.StatusField.Size = new System.Drawing.Size(188, 21);
             this.StatusField.TabIndex = 21;
             // 
-            // StatusLabel
+            // LTDEligibleLabel
             // 
-            this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(3, 0);
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(37, 13);
-            this.StatusLabel.TabIndex = 20;
-            this.StatusLabel.Text = "Status";
+            this.LTDEligibleLabel.AutoSize = true;
+            this.LTDEligibleLabel.Location = new System.Drawing.Point(3, 39);
+            this.LTDEligibleLabel.Name = "LTDEligibleLabel";
+            this.LTDEligibleLabel.Size = new System.Drawing.Size(64, 13);
+            this.LTDEligibleLabel.TabIndex = 22;
+            this.LTDEligibleLabel.Text = "LTD Eligible";
             // 
-            // RTWInformationLabel
+            // DailyHoursWorkedField
             // 
-            this.RTWInformationLabel.AutoSize = true;
-            this.RTWInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.RTWInformationLabel.Location = new System.Drawing.Point(562, 19);
-            this.RTWInformationLabel.Name = "RTWInformationLabel";
-            this.RTWInformationLabel.Size = new System.Drawing.Size(130, 20);
-            this.RTWInformationLabel.TabIndex = 19;
-            this.RTWInformationLabel.Text = "RTW Information";
+            this.DailyHoursWorkedField.Location = new System.Drawing.Point(196, 198);
+            this.DailyHoursWorkedField.Name = "DailyHoursWorkedField";
+            this.DailyHoursWorkedField.Size = new System.Drawing.Size(188, 20);
+            this.DailyHoursWorkedField.TabIndex = 31;
             // 
-            // PersonalInformationLabel
+            // LTDEligibleField
             // 
-            this.PersonalInformationLabel.AutoSize = true;
-            this.PersonalInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.PersonalInformationLabel.Location = new System.Drawing.Point(114, 19);
-            this.PersonalInformationLabel.Name = "PersonalInformationLabel";
-            this.PersonalInformationLabel.Size = new System.Drawing.Size(156, 20);
-            this.PersonalInformationLabel.TabIndex = 18;
-            this.PersonalInformationLabel.Text = "Personal Information";
+            this.LTDEligibleField.AutoSize = true;
+            this.LTDEligibleField.Location = new System.Drawing.Point(196, 42);
+            this.LTDEligibleField.Name = "LTDEligibleField";
+            this.LTDEligibleField.Size = new System.Drawing.Size(15, 14);
+            this.LTDEligibleField.TabIndex = 23;
+            this.LTDEligibleField.UseVisualStyleBackColor = true;
             // 
-            // EmailField
+            // DailyHoursWorkedLabel
             // 
-            this.EmailField.Location = new System.Drawing.Point(196, 315);
-            this.EmailField.Name = "EmailField";
-            this.EmailField.Size = new System.Drawing.Size(188, 20);
-            this.EmailField.TabIndex = 17;
+            this.DailyHoursWorkedLabel.AutoSize = true;
+            this.DailyHoursWorkedLabel.Location = new System.Drawing.Point(3, 195);
+            this.DailyHoursWorkedLabel.Name = "DailyHoursWorkedLabel";
+            this.DailyHoursWorkedLabel.Size = new System.Drawing.Size(102, 13);
+            this.DailyHoursWorkedLabel.TabIndex = 30;
+            this.DailyHoursWorkedLabel.Text = "Daily Hours Worked";
             // 
-            // EmailLabel
+            // ReferralReceivedLabel
             // 
-            this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(3, 312);
-            this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(32, 13);
-            this.EmailLabel.TabIndex = 16;
-            this.EmailLabel.Text = "Email";
+            this.ReferralReceivedLabel.AutoSize = true;
+            this.ReferralReceivedLabel.Location = new System.Drawing.Point(3, 78);
+            this.ReferralReceivedLabel.Name = "ReferralReceivedLabel";
+            this.ReferralReceivedLabel.Size = new System.Drawing.Size(93, 13);
+            this.ReferralReceivedLabel.TabIndex = 24;
+            this.ReferralReceivedLabel.Text = "Referral Received";
+            this.ReferralReceivedLabel.Click += new System.EventHandler(this.ReferralRecievedLabel_Click);
             // 
-            // WorkNumberLabel
+            // HourlySalaryField
             // 
-            this.WorkNumberLabel.AutoSize = true;
-            this.WorkNumberLabel.Location = new System.Drawing.Point(3, 273);
-            this.WorkNumberLabel.Name = "WorkNumberLabel";
-            this.WorkNumberLabel.Size = new System.Drawing.Size(73, 13);
-            this.WorkNumberLabel.TabIndex = 14;
-            this.WorkNumberLabel.Text = "Work Number";
+            this.HourlySalaryField.Location = new System.Drawing.Point(196, 159);
+            this.HourlySalaryField.Name = "HourlySalaryField";
+            this.HourlySalaryField.Size = new System.Drawing.Size(188, 20);
+            this.HourlySalaryField.TabIndex = 29;
             // 
-            // HomeNumberLabel
+            // ReferralReceivedField
             // 
-            this.HomeNumberLabel.AutoSize = true;
-            this.HomeNumberLabel.Location = new System.Drawing.Point(3, 234);
-            this.HomeNumberLabel.Name = "HomeNumberLabel";
-            this.HomeNumberLabel.Size = new System.Drawing.Size(75, 13);
-            this.HomeNumberLabel.TabIndex = 12;
-            this.HomeNumberLabel.Text = "Home Number";
+            this.ReferralReceivedField.Location = new System.Drawing.Point(196, 81);
+            this.ReferralReceivedField.Name = "ReferralReceivedField";
+            this.ReferralReceivedField.Size = new System.Drawing.Size(188, 20);
+            this.ReferralReceivedField.TabIndex = 25;
             // 
-            // PostalCodeLabel
+            // HourlySalaryLabel
             // 
-            this.PostalCodeLabel.AutoSize = true;
-            this.PostalCodeLabel.Location = new System.Drawing.Point(3, 195);
-            this.PostalCodeLabel.Name = "PostalCodeLabel";
-            this.PostalCodeLabel.Size = new System.Drawing.Size(64, 13);
-            this.PostalCodeLabel.TabIndex = 10;
-            this.PostalCodeLabel.Text = "Postal Code";
+            this.HourlySalaryLabel.AutoSize = true;
+            this.HourlySalaryLabel.Location = new System.Drawing.Point(3, 156);
+            this.HourlySalaryLabel.Name = "HourlySalaryLabel";
+            this.HourlySalaryLabel.Size = new System.Drawing.Size(69, 13);
+            this.HourlySalaryLabel.TabIndex = 28;
+            this.HourlySalaryLabel.Text = "Hourly Salary";
             // 
-            // ProvinceLabel
+            // StartDateLabel
             // 
-            this.ProvinceLabel.AutoSize = true;
-            this.ProvinceLabel.Location = new System.Drawing.Point(3, 156);
-            this.ProvinceLabel.Name = "ProvinceLabel";
-            this.ProvinceLabel.Size = new System.Drawing.Size(49, 13);
-            this.ProvinceLabel.TabIndex = 8;
-            this.ProvinceLabel.Text = "Province";
+            this.StartDateLabel.AutoSize = true;
+            this.StartDateLabel.Location = new System.Drawing.Point(3, 117);
+            this.StartDateLabel.Name = "StartDateLabel";
+            this.StartDateLabel.Size = new System.Drawing.Size(55, 13);
+            this.StartDateLabel.TabIndex = 26;
+            this.StartDateLabel.Text = "Start Date";
             // 
-            // CityLabel
+            // StartDateField
             // 
-            this.CityLabel.AutoSize = true;
-            this.CityLabel.Location = new System.Drawing.Point(3, 117);
-            this.CityLabel.Name = "CityLabel";
-            this.CityLabel.Size = new System.Drawing.Size(24, 13);
-            this.CityLabel.TabIndex = 6;
-            this.CityLabel.Text = "City";
-            // 
-            // LastNameLabel
-            // 
-            this.LastNameLabel.AutoSize = true;
-            this.LastNameLabel.Location = new System.Drawing.Point(3, 78);
-            this.LastNameLabel.Name = "LastNameLabel";
-            this.LastNameLabel.Size = new System.Drawing.Size(58, 13);
-            this.LastNameLabel.TabIndex = 4;
-            this.LastNameLabel.Text = "Last Name";
-            // 
-            // FirstNameLabel
-            // 
-            this.FirstNameLabel.AutoSize = true;
-            this.FirstNameLabel.Location = new System.Drawing.Point(3, 39);
-            this.FirstNameLabel.Name = "FirstNameLabel";
-            this.FirstNameLabel.Size = new System.Drawing.Size(57, 13);
-            this.FirstNameLabel.TabIndex = 2;
-            this.FirstNameLabel.Text = "First Name";
-            // 
-            // EmployeeNumberLabel
-            // 
-            this.EmployeeNumberLabel.AutoSize = true;
-            this.EmployeeNumberLabel.Location = new System.Drawing.Point(3, 0);
-            this.EmployeeNumberLabel.Name = "EmployeeNumberLabel";
-            this.EmployeeNumberLabel.Size = new System.Drawing.Size(93, 13);
-            this.EmployeeNumberLabel.TabIndex = 1;
-            this.EmployeeNumberLabel.Text = "Employee Number";
-            // 
-            // ReportsTab
-            // 
-            this.ReportsTab.Location = new System.Drawing.Point(4, 22);
-            this.ReportsTab.Name = "ReportsTab";
-            this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ReportsTab.Size = new System.Drawing.Size(1152, 696);
-            this.ReportsTab.TabIndex = 1;
-            this.ReportsTab.Text = "Reports";
-            this.ReportsTab.UseVisualStyleBackColor = true;
-            // 
-            // NotificationsTab
-            // 
-            this.NotificationsTab.Location = new System.Drawing.Point(4, 22);
-            this.NotificationsTab.Name = "NotificationsTab";
-            this.NotificationsTab.Size = new System.Drawing.Size(1152, 696);
-            this.NotificationsTab.TabIndex = 2;
-            this.NotificationsTab.Text = "Notifications";
-            this.NotificationsTab.UseVisualStyleBackColor = true;
+            this.StartDateField.Location = new System.Drawing.Point(196, 120);
+            this.StartDateField.Name = "StartDateField";
+            this.StartDateField.Size = new System.Drawing.Size(188, 20);
+            this.StartDateField.TabIndex = 27;
             // 
             // PersonalInformationTable
             // 
@@ -430,26 +324,78 @@
             this.PersonalInformationTable.Size = new System.Drawing.Size(387, 357);
             this.PersonalInformationTable.TabIndex = 33;
             // 
-            // WorkNumberField
+            // EmployeeNumberLabel
             // 
-            this.WorkNumberField.Location = new System.Drawing.Point(196, 276);
-            this.WorkNumberField.Name = "WorkNumberField";
-            this.WorkNumberField.Size = new System.Drawing.Size(188, 20);
-            this.WorkNumberField.TabIndex = 15;
+            this.EmployeeNumberLabel.AutoSize = true;
+            this.EmployeeNumberLabel.Location = new System.Drawing.Point(3, 0);
+            this.EmployeeNumberLabel.Name = "EmployeeNumberLabel";
+            this.EmployeeNumberLabel.Size = new System.Drawing.Size(93, 13);
+            this.EmployeeNumberLabel.TabIndex = 1;
+            this.EmployeeNumberLabel.Text = "Employee Number";
             // 
-            // textBox2
+            // EmployeeNumberField
             // 
-            this.textBox2.Location = new System.Drawing.Point(196, 237);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(188, 20);
-            this.textBox2.TabIndex = 13;
+            this.EmployeeNumberField.Location = new System.Drawing.Point(196, 3);
+            this.EmployeeNumberField.Name = "EmployeeNumberField";
+            this.EmployeeNumberField.Size = new System.Drawing.Size(188, 20);
+            this.EmployeeNumberField.TabIndex = 0;
             // 
-            // PostalCodeField
+            // FirstNameLabel
             // 
-            this.PostalCodeField.Location = new System.Drawing.Point(196, 198);
-            this.PostalCodeField.Name = "PostalCodeField";
-            this.PostalCodeField.Size = new System.Drawing.Size(188, 20);
-            this.PostalCodeField.TabIndex = 11;
+            this.FirstNameLabel.AutoSize = true;
+            this.FirstNameLabel.Location = new System.Drawing.Point(3, 39);
+            this.FirstNameLabel.Name = "FirstNameLabel";
+            this.FirstNameLabel.Size = new System.Drawing.Size(57, 13);
+            this.FirstNameLabel.TabIndex = 2;
+            this.FirstNameLabel.Text = "First Name";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(196, 42);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(188, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // LastNameLabel
+            // 
+            this.LastNameLabel.AutoSize = true;
+            this.LastNameLabel.Location = new System.Drawing.Point(3, 78);
+            this.LastNameLabel.Name = "LastNameLabel";
+            this.LastNameLabel.Size = new System.Drawing.Size(58, 13);
+            this.LastNameLabel.TabIndex = 4;
+            this.LastNameLabel.Text = "Last Name";
+            // 
+            // LastNameField
+            // 
+            this.LastNameField.Location = new System.Drawing.Point(196, 81);
+            this.LastNameField.Name = "LastNameField";
+            this.LastNameField.Size = new System.Drawing.Size(188, 20);
+            this.LastNameField.TabIndex = 5;
+            // 
+            // CityLabel
+            // 
+            this.CityLabel.AutoSize = true;
+            this.CityLabel.Location = new System.Drawing.Point(3, 117);
+            this.CityLabel.Name = "CityLabel";
+            this.CityLabel.Size = new System.Drawing.Size(24, 13);
+            this.CityLabel.TabIndex = 6;
+            this.CityLabel.Text = "City";
+            // 
+            // CityField
+            // 
+            this.CityField.Location = new System.Drawing.Point(196, 120);
+            this.CityField.Name = "CityField";
+            this.CityField.Size = new System.Drawing.Size(188, 20);
+            this.CityField.TabIndex = 7;
+            // 
+            // ProvinceLabel
+            // 
+            this.ProvinceLabel.AutoSize = true;
+            this.ProvinceLabel.Location = new System.Drawing.Point(3, 156);
+            this.ProvinceLabel.Name = "ProvinceLabel";
+            this.ProvinceLabel.Size = new System.Drawing.Size(49, 13);
+            this.ProvinceLabel.TabIndex = 8;
+            this.ProvinceLabel.Text = "Province";
             // 
             // ProvinceField
             // 
@@ -473,63 +419,117 @@
             this.ProvinceField.Size = new System.Drawing.Size(188, 21);
             this.ProvinceField.TabIndex = 9;
             // 
-            // CityField
+            // PostalCodeLabel
             // 
-            this.CityField.Location = new System.Drawing.Point(196, 120);
-            this.CityField.Name = "CityField";
-            this.CityField.Size = new System.Drawing.Size(188, 20);
-            this.CityField.TabIndex = 7;
+            this.PostalCodeLabel.AutoSize = true;
+            this.PostalCodeLabel.Location = new System.Drawing.Point(3, 195);
+            this.PostalCodeLabel.Name = "PostalCodeLabel";
+            this.PostalCodeLabel.Size = new System.Drawing.Size(64, 13);
+            this.PostalCodeLabel.TabIndex = 10;
+            this.PostalCodeLabel.Text = "Postal Code";
             // 
-            // LastNameField
+            // PostalCodeField
             // 
-            this.LastNameField.Location = new System.Drawing.Point(196, 81);
-            this.LastNameField.Name = "LastNameField";
-            this.LastNameField.Size = new System.Drawing.Size(188, 20);
-            this.LastNameField.TabIndex = 5;
+            this.PostalCodeField.Location = new System.Drawing.Point(196, 198);
+            this.PostalCodeField.Name = "PostalCodeField";
+            this.PostalCodeField.Size = new System.Drawing.Size(188, 20);
+            this.PostalCodeField.TabIndex = 11;
             // 
-            // textBox1
+            // HomeNumberLabel
             // 
-            this.textBox1.Location = new System.Drawing.Point(196, 42);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 20);
-            this.textBox1.TabIndex = 3;
+            this.HomeNumberLabel.AutoSize = true;
+            this.HomeNumberLabel.Location = new System.Drawing.Point(3, 234);
+            this.HomeNumberLabel.Name = "HomeNumberLabel";
+            this.HomeNumberLabel.Size = new System.Drawing.Size(75, 13);
+            this.HomeNumberLabel.TabIndex = 12;
+            this.HomeNumberLabel.Text = "Home Number";
             // 
-            // EmployeeNumberField
+            // textBox2
             // 
-            this.EmployeeNumberField.Location = new System.Drawing.Point(196, 3);
-            this.EmployeeNumberField.Name = "EmployeeNumberField";
-            this.EmployeeNumberField.Size = new System.Drawing.Size(188, 20);
-            this.EmployeeNumberField.TabIndex = 0;
+            this.textBox2.Location = new System.Drawing.Point(196, 237);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(188, 20);
+            this.textBox2.TabIndex = 13;
             // 
-            // RTWInformationTable
+            // WorkNumberLabel
             // 
-            this.RTWInformationTable.ColumnCount = 2;
-            this.RTWInformationTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.RTWInformationTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.RTWInformationTable.Controls.Add(this.StatusLabel, 0, 0);
-            this.RTWInformationTable.Controls.Add(this.StatusField, 1, 0);
-            this.RTWInformationTable.Controls.Add(this.LTDEligibleLabel, 0, 1);
-            this.RTWInformationTable.Controls.Add(this.DailyHoursWorkedField, 1, 5);
-            this.RTWInformationTable.Controls.Add(this.LTDEligibleField, 1, 1);
-            this.RTWInformationTable.Controls.Add(this.DailyHoursWorkedLabel, 0, 5);
-            this.RTWInformationTable.Controls.Add(this.ReferralRecievedLabel, 0, 2);
-            this.RTWInformationTable.Controls.Add(this.HourlySalaryField, 1, 4);
-            this.RTWInformationTable.Controls.Add(this.ReferralRecievedField, 1, 2);
-            this.RTWInformationTable.Controls.Add(this.HourlySalaryLabel, 0, 4);
-            this.RTWInformationTable.Controls.Add(this.StartDateLabel, 0, 3);
-            this.RTWInformationTable.Controls.Add(this.StartDateField, 1, 3);
-            this.RTWInformationTable.Location = new System.Drawing.Point(486, 62);
-            this.RTWInformationTable.Name = "RTWInformationTable";
-            this.RTWInformationTable.RowCount = 6;
-            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
-            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
-            this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.RTWInformationTable.Size = new System.Drawing.Size(387, 236);
-            this.RTWInformationTable.TabIndex = 34;
+            this.WorkNumberLabel.AutoSize = true;
+            this.WorkNumberLabel.Location = new System.Drawing.Point(3, 273);
+            this.WorkNumberLabel.Name = "WorkNumberLabel";
+            this.WorkNumberLabel.Size = new System.Drawing.Size(73, 13);
+            this.WorkNumberLabel.TabIndex = 14;
+            this.WorkNumberLabel.Text = "Work Number";
+            // 
+            // WorkNumberField
+            // 
+            this.WorkNumberField.Location = new System.Drawing.Point(196, 276);
+            this.WorkNumberField.Name = "WorkNumberField";
+            this.WorkNumberField.Size = new System.Drawing.Size(188, 20);
+            this.WorkNumberField.TabIndex = 15;
+            // 
+            // EmailField
+            // 
+            this.EmailField.Location = new System.Drawing.Point(196, 315);
+            this.EmailField.Name = "EmailField";
+            this.EmailField.Size = new System.Drawing.Size(188, 20);
+            this.EmailField.TabIndex = 17;
+            // 
+            // EmailLabel
+            // 
+            this.EmailLabel.AutoSize = true;
+            this.EmailLabel.Location = new System.Drawing.Point(3, 312);
+            this.EmailLabel.Name = "EmailLabel";
+            this.EmailLabel.Size = new System.Drawing.Size(32, 13);
+            this.EmailLabel.TabIndex = 16;
+            this.EmailLabel.Text = "Email";
+            // 
+            // SubmitEntryButton
+            // 
+            this.SubmitEntryButton.Location = new System.Drawing.Point(486, 336);
+            this.SubmitEntryButton.Name = "SubmitEntryButton";
+            this.SubmitEntryButton.Size = new System.Drawing.Size(387, 23);
+            this.SubmitEntryButton.TabIndex = 32;
+            this.SubmitEntryButton.Text = "Submit Entry";
+            this.SubmitEntryButton.UseVisualStyleBackColor = true;
+            // 
+            // RTWInformationLabel
+            // 
+            this.RTWInformationLabel.AutoSize = true;
+            this.RTWInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.RTWInformationLabel.Location = new System.Drawing.Point(562, 19);
+            this.RTWInformationLabel.Name = "RTWInformationLabel";
+            this.RTWInformationLabel.Size = new System.Drawing.Size(130, 20);
+            this.RTWInformationLabel.TabIndex = 19;
+            this.RTWInformationLabel.Text = "RTW Information";
+            // 
+            // PersonalInformationLabel
+            // 
+            this.PersonalInformationLabel.AutoSize = true;
+            this.PersonalInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.PersonalInformationLabel.Location = new System.Drawing.Point(114, 19);
+            this.PersonalInformationLabel.Name = "PersonalInformationLabel";
+            this.PersonalInformationLabel.Size = new System.Drawing.Size(156, 20);
+            this.PersonalInformationLabel.TabIndex = 18;
+            this.PersonalInformationLabel.Text = "Personal Information";
+            // 
+            // ReportsTab
+            // 
+            this.ReportsTab.Location = new System.Drawing.Point(4, 22);
+            this.ReportsTab.Name = "ReportsTab";
+            this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ReportsTab.Size = new System.Drawing.Size(1152, 696);
+            this.ReportsTab.TabIndex = 1;
+            this.ReportsTab.Text = "Reports";
+            this.ReportsTab.UseVisualStyleBackColor = true;
+            // 
+            // NotificationsTab
+            // 
+            this.NotificationsTab.Location = new System.Drawing.Point(4, 22);
+            this.NotificationsTab.Name = "NotificationsTab";
+            this.NotificationsTab.Size = new System.Drawing.Size(1152, 696);
+            this.NotificationsTab.TabIndex = 2;
+            this.NotificationsTab.Text = "Notifications";
+            this.NotificationsTab.UseVisualStyleBackColor = true;
             // 
             // MainFrame
             // 
@@ -548,10 +548,10 @@
             this.MainTab.ResumeLayout(false);
             this.FirstNameField.ResumeLayout(false);
             this.FirstNameField.PerformLayout();
-            this.PersonalInformationTable.ResumeLayout(false);
-            this.PersonalInformationTable.PerformLayout();
             this.RTWInformationTable.ResumeLayout(false);
             this.RTWInformationTable.PerformLayout();
+            this.PersonalInformationTable.ResumeLayout(false);
+            this.PersonalInformationTable.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,10 +583,10 @@
         private System.Windows.Forms.ComboBox StatusField;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.Label RTWInformationLabel;
-        private System.Windows.Forms.Label ReferralRecievedLabel;
+        private System.Windows.Forms.Label ReferralReceivedLabel;
         private System.Windows.Forms.CheckBox LTDEligibleField;
         private System.Windows.Forms.Label LTDEligibleLabel;
-        private System.Windows.Forms.DateTimePicker ReferralRecievedField;
+        private System.Windows.Forms.DateTimePicker ReferralReceivedField;
         private System.Windows.Forms.Button SubmitEntryButton;
         private System.Windows.Forms.TextBox DailyHoursWorkedField;
         private System.Windows.Forms.Label DailyHoursWorkedLabel;
