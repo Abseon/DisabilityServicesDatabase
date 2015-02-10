@@ -37,6 +37,8 @@
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTab = new System.Windows.Forms.TabControl();
             this.FirstNameField = new System.Windows.Forms.TabPage();
+            this.ExistingPersonSearchField = new System.Windows.Forms.ComboBox();
+            this.ExistingPersonButton = new System.Windows.Forms.RadioButton();
             this.RTWInformationTable = new System.Windows.Forms.TableLayoutPanel();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.StatusField = new System.Windows.Forms.ComboBox();
@@ -140,6 +142,8 @@
             // 
             // FirstNameField
             // 
+            this.FirstNameField.Controls.Add(this.ExistingPersonSearchField);
+            this.FirstNameField.Controls.Add(this.ExistingPersonButton);
             this.FirstNameField.Controls.Add(this.RTWInformationTable);
             this.FirstNameField.Controls.Add(this.PersonalInformationTable);
             this.FirstNameField.Controls.Add(this.SubmitEntryButton);
@@ -152,6 +156,32 @@
             this.FirstNameField.TabIndex = 0;
             this.FirstNameField.Text = "Data Entry";
             this.FirstNameField.UseVisualStyleBackColor = true;
+            // 
+            // ExistingPersonSearchField
+            // 
+            this.ExistingPersonSearchField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ExistingPersonSearchField.FormattingEnabled = true;
+            this.ExistingPersonSearchField.Items.AddRange(new object[] {
+            "HIM",
+            "HER",
+            "IT"});
+            this.ExistingPersonSearchField.Location = new System.Drawing.Point(118, 42);
+            this.ExistingPersonSearchField.Name = "ExistingPersonSearchField";
+            this.ExistingPersonSearchField.Size = new System.Drawing.Size(288, 21);
+            this.ExistingPersonSearchField.TabIndex = 36;
+            this.ExistingPersonSearchField.Visible = false;
+            // 
+            // ExistingPersonButton
+            // 
+            this.ExistingPersonButton.AutoSize = true;
+            this.ExistingPersonButton.Location = new System.Drawing.Point(314, 21);
+            this.ExistingPersonButton.Name = "ExistingPersonButton";
+            this.ExistingPersonButton.Size = new System.Drawing.Size(103, 17);
+            this.ExistingPersonButton.TabIndex = 35;
+            this.ExistingPersonButton.TabStop = true;
+            this.ExistingPersonButton.Text = "Existing Person?";
+            this.ExistingPersonButton.UseVisualStyleBackColor = true;
+            this.ExistingPersonButton.Click += new System.EventHandler(this.ExistingPersonButton_Click);
             // 
             // RTWInformationTable
             // 
@@ -491,6 +521,7 @@
             this.SubmitEntryButton.TabIndex = 32;
             this.SubmitEntryButton.Text = "Submit Entry";
             this.SubmitEntryButton.UseVisualStyleBackColor = true;
+            this.SubmitEntryButton.Click += new System.EventHandler(this.SubmitEntryButton_Click);
             // 
             // RTWInformationLabel
             // 
@@ -604,6 +635,8 @@
         private System.Windows.Forms.TextBox PostalCodeField;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox WorkNumberField;
+        private System.Windows.Forms.RadioButton ExistingPersonButton;
+        private System.Windows.Forms.ComboBox ExistingPersonSearchField;
     }
 }
 

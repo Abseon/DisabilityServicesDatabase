@@ -18,19 +18,51 @@ namespace DisabilityServiceDatabase
         private List<DataEntry> MainDatabase = new List<DataEntry>();
         // Collection Representing the Entires added during the current Session
         private List<DataEntry> AddedEntries = new List<DataEntry>();
+        // Boolean representing the status of data entry, defaults to false for !existingPerson
+        Boolean ExistingPerson = false;
 
         public MainFrame()
         {
             InitializeComponent();
-            Debug.WriteLine(DatabaseRead("Employee").ToString());
-            Debug.WriteLine(DatabaseRead("Case").ToString());
-            Debug.WriteLine("END");
+            DatabaseRead("Employee");
+            DatabaseRead("Case");
         }
 
+        // Action Listeners
         private void ReferralRecievedLabel_Click(object sender, EventArgs e)
         {
 
         }
+        private void ExistingPersonButton_Click(object sender, EventArgs e)
+        {
+            // Switches from Personal Input to an existing person search
+            // TO DO: Vanish Personal input and Display person search
+            PersonalInformationTable.Visible = !PersonalInformationTable.Visible;
+            ExistingPersonButton.Checked = !ExistingPersonButton.Checked;
+            ExistingPersonSearchField.Visible = !ExistingPersonSearchField.Visible;
+        }
+        private void SubmitEntryButton_Click(object sender, EventArgs e)
+        {
+            // On submit button press all entered data is added as a DataEntry object to AddedEntries
+            //TO DO
+            DataEntry NewEntry = new DataEntry();
+            if (EmployeeNumberField.Text != "")
+            {
+                NewEntry.PersonalFields["Employment Number"] = EmployeeNumberField.Text;
+
+                NewEntry.RTWFields["Employment Number"] = EmployeeNumberField.Text;
+                //TO DO: Rest of fields
+                AddedEntries.Add(NewEntry);
+            }
+            else
+            {
+                // TO DO: ERROR TEXT BOX as employee # is critical
+            }
+            
+            Debug.WriteLine("CLICKED");
+        }
+
+        // Custom Functions
         private Boolean DatabaseRead(String commandString)
         {
             // Connects to the access database and reads entries into MainDatabase
@@ -62,8 +94,43 @@ namespace DisabilityServiceDatabase
                 
                 DatabaseConnection.Open();
                 DatabaseAdapter.Fill(DatabaseSet);
-                // DB Access Here vvv
-                // To be added
+                // DB Access Here is the first table as there is only one because of the query
+                DataRowCollection DatabaseRows = DatabaseSet.Tables[0].Rows;
+
+                if (commandString == "Employee")
+                {   
+                    
+                    foreach (DataRow SingleRow in DatabaseRows)
+                    {
+                        // Reads the values into a Data Entry - this is order dependent
+                        DataEntry ReadEntry = new DataEntry();
+                        String[] EmployeeFields = new String[10] { "Employment Number", "Last Name", "First Name","Street Address","City","Province","Postal Code","Phone Number (Home)","Phone Number (Work)","Email" }; // Consider replacing with reference
+                        for (int i = 0; i < 10; i++)
+                        {
+                            ReadEntry.PersonalFields[EmployeeFields[i]] = SingleRow.ItemArray[i];
+                        }
+                        ReadEntry.ContainsPersonalInfo = true;
+                        MainDatabase.Add(ReadEntry);
+                    }
+                }
+                else if (commandString == "Case")
+                {
+                    foreach (DataRow SingleRow in DatabaseRows)
+                    {
+                        // Reads the values into a Data Entry - this is order dependent
+                        DataEntry ReadEntry = new DataEntry();
+                        String[] CaseFields = new String[26] { "ID", "Employee Number", "LTD Eligible", "Referral Recieved", "Sick Leave Start", "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required",
+                            "LTD Application Sent", "Employee Stat to GWL","Benefits Sheet Required","Day 160","Day 181 + 3 Months","Benefits Sheet Sent","Benefits Sheet Recieved","Accomodation Start Date",
+                            "Return to Work","Return to Work Date","Return To Work Follow-Up","RTW Follow-Up Complete","Return To Work End Plan","Accomodation Follow-Up","Number of Days Absent","Hourly Salary",
+                            "Hours Worked/Day","SL Cost/Day"}; // Consider replacing with reference
+                        for (int i = 0; i < 26 ; i++)
+                        {
+                            ReadEntry.RTWFields[CaseFields[i]] = SingleRow.ItemArray[i];
+                        }
+                        ReadEntry.ContainsCaseInfo= true;
+                        MainDatabase.Add(ReadEntry);
+                    }
+                }
                 DatabaseConnection.Close();
                 return true;
             }
@@ -79,9 +146,9 @@ namespace DisabilityServiceDatabase
     public class DataEntry
     {
         // Class representing the data contained in a single entry either created by the application or read from the database
-        // Note: This is not a single person's account but rather a single disability account
+        // Note: This may contain Case info, personal info or both
         
-        //RTW Information
+        //RTW (Case) Information
         public Dictionary<string, object> RTWFields = new Dictionary<string, object>();
         //Personal Info
         public Dictionary<string, object> PersonalFields = new Dictionary<string, object>();
@@ -91,7 +158,8 @@ namespace DisabilityServiceDatabase
     
         public DataEntry()
         {
-            // Constructor adding all fields to their respective dictionary
+            // Constructor adding all fields to their respective dictionary 
+            // Consider replacing with reference
             RTWFields.Add("ID",null);
             RTWFields.Add("Employee Number", null);
             RTWFields.Add("LTD Eligible", null);
@@ -116,9 +184,10 @@ namespace DisabilityServiceDatabase
             RTWFields.Add("Accomodation Follow-Up", null);
             RTWFields.Add("Number of Days Absent", null);
             RTWFields.Add("Hourly Salary", null);
-            RTWFields.Add("Days Worked/Day", null);
+            RTWFields.Add("Hours Worked/Day", null);
             RTWFields.Add("SL Cost/Day", null);
 
+            PersonalFields.Add("Employment Number",null);
             PersonalFields.Add("Last Name",null);
             PersonalFields.Add("First Name", null);
             PersonalFields.Add("Street Address", null);
