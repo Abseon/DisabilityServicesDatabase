@@ -36,7 +36,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTab = new System.Windows.Forms.TabControl();
-            this.FirstNameField = new System.Windows.Forms.TabPage();
+            this.DataEntryTab = new System.Windows.Forms.TabPage();
             this.ExistingPersonSearchField = new System.Windows.Forms.ComboBox();
             this.ExistingPersonButton = new System.Windows.Forms.RadioButton();
             this.RTWInformationTable = new System.Windows.Forms.TableLayoutPanel();
@@ -54,23 +54,25 @@
             this.StartDateField = new System.Windows.Forms.DateTimePicker();
             this.PersonalInformationTable = new System.Windows.Forms.TableLayoutPanel();
             this.EmployeeNumberLabel = new System.Windows.Forms.Label();
-            this.EmployeeNumberField = new System.Windows.Forms.TextBox();
-            this.FirstNameLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.LastNameLabel = new System.Windows.Forms.Label();
+            this.EmailField = new System.Windows.Forms.TextBox();
             this.LastNameField = new System.Windows.Forms.TextBox();
-            this.CityLabel = new System.Windows.Forms.Label();
-            this.CityField = new System.Windows.Forms.TextBox();
-            this.ProvinceLabel = new System.Windows.Forms.Label();
-            this.ProvinceField = new System.Windows.Forms.ComboBox();
+            this.FirstNameField = new System.Windows.Forms.TextBox();
+            this.EmployeeNumberField = new System.Windows.Forms.TextBox();
+            this.WorkNumberField = new System.Windows.Forms.TextBox();
+            this.FirstNameLabel = new System.Windows.Forms.Label();
+            this.LastNameLabel = new System.Windows.Forms.Label();
+            this.HomeNumberField = new System.Windows.Forms.TextBox();
+            this.EmailLabel = new System.Windows.Forms.Label();
+            this.WorkNumberLabel = new System.Windows.Forms.Label();
+            this.HomeNumberLabel = new System.Windows.Forms.Label();
             this.PostalCodeLabel = new System.Windows.Forms.Label();
             this.PostalCodeField = new System.Windows.Forms.TextBox();
-            this.HomeNumberLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.WorkNumberLabel = new System.Windows.Forms.Label();
-            this.WorkNumberField = new System.Windows.Forms.TextBox();
-            this.EmailField = new System.Windows.Forms.TextBox();
-            this.EmailLabel = new System.Windows.Forms.Label();
+            this.StreetAddressField = new System.Windows.Forms.TextBox();
+            this.ProvinceField = new System.Windows.Forms.ComboBox();
+            this.CityField = new System.Windows.Forms.TextBox();
+            this.ProvinceLabel = new System.Windows.Forms.Label();
+            this.CityLabel = new System.Windows.Forms.Label();
+            this.StreetAddressLabel = new System.Windows.Forms.Label();
             this.SubmitEntryButton = new System.Windows.Forms.Button();
             this.RTWInformationLabel = new System.Windows.Forms.Label();
             this.PersonalInformationLabel = new System.Windows.Forms.Label();
@@ -78,7 +80,7 @@
             this.NotificationsTab = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.MainTab.SuspendLayout();
-            this.FirstNameField.SuspendLayout();
+            this.DataEntryTab.SuspendLayout();
             this.RTWInformationTable.SuspendLayout();
             this.PersonalInformationTable.SuspendLayout();
             this.SuspendLayout();
@@ -131,7 +133,7 @@
             // 
             // MainTab
             // 
-            this.MainTab.Controls.Add(this.FirstNameField);
+            this.MainTab.Controls.Add(this.DataEntryTab);
             this.MainTab.Controls.Add(this.ReportsTab);
             this.MainTab.Controls.Add(this.NotificationsTab);
             this.MainTab.Location = new System.Drawing.Point(12, 27);
@@ -140,22 +142,22 @@
             this.MainTab.Size = new System.Drawing.Size(1160, 722);
             this.MainTab.TabIndex = 1;
             // 
-            // FirstNameField
+            // DataEntryTab
             // 
-            this.FirstNameField.Controls.Add(this.ExistingPersonSearchField);
-            this.FirstNameField.Controls.Add(this.ExistingPersonButton);
-            this.FirstNameField.Controls.Add(this.RTWInformationTable);
-            this.FirstNameField.Controls.Add(this.PersonalInformationTable);
-            this.FirstNameField.Controls.Add(this.SubmitEntryButton);
-            this.FirstNameField.Controls.Add(this.RTWInformationLabel);
-            this.FirstNameField.Controls.Add(this.PersonalInformationLabel);
-            this.FirstNameField.Location = new System.Drawing.Point(4, 22);
-            this.FirstNameField.Name = "FirstNameField";
-            this.FirstNameField.Padding = new System.Windows.Forms.Padding(3);
-            this.FirstNameField.Size = new System.Drawing.Size(1152, 696);
-            this.FirstNameField.TabIndex = 0;
-            this.FirstNameField.Text = "Data Entry";
-            this.FirstNameField.UseVisualStyleBackColor = true;
+            this.DataEntryTab.Controls.Add(this.ExistingPersonSearchField);
+            this.DataEntryTab.Controls.Add(this.ExistingPersonButton);
+            this.DataEntryTab.Controls.Add(this.RTWInformationTable);
+            this.DataEntryTab.Controls.Add(this.PersonalInformationTable);
+            this.DataEntryTab.Controls.Add(this.SubmitEntryButton);
+            this.DataEntryTab.Controls.Add(this.RTWInformationLabel);
+            this.DataEntryTab.Controls.Add(this.PersonalInformationLabel);
+            this.DataEntryTab.Location = new System.Drawing.Point(4, 22);
+            this.DataEntryTab.Name = "DataEntryTab";
+            this.DataEntryTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DataEntryTab.Size = new System.Drawing.Size(1152, 696);
+            this.DataEntryTab.TabIndex = 0;
+            this.DataEntryTab.Text = "Data Entry";
+            this.DataEntryTab.UseVisualStyleBackColor = true;
             // 
             // ExistingPersonSearchField
             // 
@@ -322,26 +324,28 @@
             this.PersonalInformationTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.PersonalInformationTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.PersonalInformationTable.Controls.Add(this.EmployeeNumberLabel, 0, 0);
-            this.PersonalInformationTable.Controls.Add(this.EmployeeNumberField, 1, 0);
-            this.PersonalInformationTable.Controls.Add(this.FirstNameLabel, 0, 1);
-            this.PersonalInformationTable.Controls.Add(this.textBox1, 1, 1);
-            this.PersonalInformationTable.Controls.Add(this.LastNameLabel, 0, 2);
+            this.PersonalInformationTable.Controls.Add(this.EmailField, 1, 9);
             this.PersonalInformationTable.Controls.Add(this.LastNameField, 1, 2);
-            this.PersonalInformationTable.Controls.Add(this.CityLabel, 0, 3);
-            this.PersonalInformationTable.Controls.Add(this.CityField, 1, 3);
-            this.PersonalInformationTable.Controls.Add(this.ProvinceLabel, 0, 4);
-            this.PersonalInformationTable.Controls.Add(this.ProvinceField, 1, 4);
-            this.PersonalInformationTable.Controls.Add(this.PostalCodeLabel, 0, 5);
-            this.PersonalInformationTable.Controls.Add(this.PostalCodeField, 1, 5);
-            this.PersonalInformationTable.Controls.Add(this.HomeNumberLabel, 0, 6);
-            this.PersonalInformationTable.Controls.Add(this.textBox2, 1, 6);
-            this.PersonalInformationTable.Controls.Add(this.WorkNumberLabel, 0, 7);
-            this.PersonalInformationTable.Controls.Add(this.WorkNumberField, 1, 7);
-            this.PersonalInformationTable.Controls.Add(this.EmailField, 1, 8);
-            this.PersonalInformationTable.Controls.Add(this.EmailLabel, 0, 8);
+            this.PersonalInformationTable.Controls.Add(this.FirstNameField, 1, 1);
+            this.PersonalInformationTable.Controls.Add(this.EmployeeNumberField, 1, 0);
+            this.PersonalInformationTable.Controls.Add(this.WorkNumberField, 1, 8);
+            this.PersonalInformationTable.Controls.Add(this.FirstNameLabel, 0, 1);
+            this.PersonalInformationTable.Controls.Add(this.LastNameLabel, 0, 2);
+            this.PersonalInformationTable.Controls.Add(this.HomeNumberField, 1, 7);
+            this.PersonalInformationTable.Controls.Add(this.EmailLabel, 0, 9);
+            this.PersonalInformationTable.Controls.Add(this.WorkNumberLabel, 0, 8);
+            this.PersonalInformationTable.Controls.Add(this.HomeNumberLabel, 0, 7);
+            this.PersonalInformationTable.Controls.Add(this.PostalCodeLabel, 0, 6);
+            this.PersonalInformationTable.Controls.Add(this.PostalCodeField, 1, 6);
+            this.PersonalInformationTable.Controls.Add(this.StreetAddressField, 1, 3);
+            this.PersonalInformationTable.Controls.Add(this.ProvinceField, 1, 5);
+            this.PersonalInformationTable.Controls.Add(this.CityField, 1, 4);
+            this.PersonalInformationTable.Controls.Add(this.ProvinceLabel, 0, 5);
+            this.PersonalInformationTable.Controls.Add(this.CityLabel, 0, 4);
+            this.PersonalInformationTable.Controls.Add(this.StreetAddressLabel, 0, 3);
             this.PersonalInformationTable.Location = new System.Drawing.Point(19, 62);
             this.PersonalInformationTable.Name = "PersonalInformationTable";
-            this.PersonalInformationTable.RowCount = 9;
+            this.PersonalInformationTable.RowCount = 10;
             this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
@@ -351,6 +355,8 @@
             this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.PersonalInformationTable.Size = new System.Drawing.Size(387, 357);
             this.PersonalInformationTable.TabIndex = 33;
             // 
@@ -363,6 +369,27 @@
             this.EmployeeNumberLabel.TabIndex = 1;
             this.EmployeeNumberLabel.Text = "Employee Number";
             // 
+            // EmailField
+            // 
+            this.EmailField.Location = new System.Drawing.Point(196, 336);
+            this.EmailField.Name = "EmailField";
+            this.EmailField.Size = new System.Drawing.Size(188, 20);
+            this.EmailField.TabIndex = 17;
+            // 
+            // LastNameField
+            // 
+            this.LastNameField.Location = new System.Drawing.Point(196, 77);
+            this.LastNameField.Name = "LastNameField";
+            this.LastNameField.Size = new System.Drawing.Size(188, 20);
+            this.LastNameField.TabIndex = 5;
+            // 
+            // FirstNameField
+            // 
+            this.FirstNameField.Location = new System.Drawing.Point(196, 40);
+            this.FirstNameField.Name = "FirstNameField";
+            this.FirstNameField.Size = new System.Drawing.Size(188, 20);
+            this.FirstNameField.TabIndex = 3;
+            // 
             // EmployeeNumberField
             // 
             this.EmployeeNumberField.Location = new System.Drawing.Point(196, 3);
@@ -370,62 +397,87 @@
             this.EmployeeNumberField.Size = new System.Drawing.Size(188, 20);
             this.EmployeeNumberField.TabIndex = 0;
             // 
+            // WorkNumberField
+            // 
+            this.WorkNumberField.Location = new System.Drawing.Point(196, 299);
+            this.WorkNumberField.Name = "WorkNumberField";
+            this.WorkNumberField.Size = new System.Drawing.Size(188, 20);
+            this.WorkNumberField.TabIndex = 15;
+            // 
             // FirstNameLabel
             // 
             this.FirstNameLabel.AutoSize = true;
-            this.FirstNameLabel.Location = new System.Drawing.Point(3, 39);
+            this.FirstNameLabel.Location = new System.Drawing.Point(3, 37);
             this.FirstNameLabel.Name = "FirstNameLabel";
             this.FirstNameLabel.Size = new System.Drawing.Size(57, 13);
             this.FirstNameLabel.TabIndex = 2;
             this.FirstNameLabel.Text = "First Name";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(196, 42);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 20);
-            this.textBox1.TabIndex = 3;
-            // 
             // LastNameLabel
             // 
             this.LastNameLabel.AutoSize = true;
-            this.LastNameLabel.Location = new System.Drawing.Point(3, 78);
+            this.LastNameLabel.Location = new System.Drawing.Point(3, 74);
             this.LastNameLabel.Name = "LastNameLabel";
             this.LastNameLabel.Size = new System.Drawing.Size(58, 13);
             this.LastNameLabel.TabIndex = 4;
             this.LastNameLabel.Text = "Last Name";
             // 
-            // LastNameField
+            // HomeNumberField
             // 
-            this.LastNameField.Location = new System.Drawing.Point(196, 81);
-            this.LastNameField.Name = "LastNameField";
-            this.LastNameField.Size = new System.Drawing.Size(188, 20);
-            this.LastNameField.TabIndex = 5;
+            this.HomeNumberField.Location = new System.Drawing.Point(196, 262);
+            this.HomeNumberField.Name = "HomeNumberField";
+            this.HomeNumberField.Size = new System.Drawing.Size(188, 20);
+            this.HomeNumberField.TabIndex = 13;
             // 
-            // CityLabel
+            // EmailLabel
             // 
-            this.CityLabel.AutoSize = true;
-            this.CityLabel.Location = new System.Drawing.Point(3, 117);
-            this.CityLabel.Name = "CityLabel";
-            this.CityLabel.Size = new System.Drawing.Size(24, 13);
-            this.CityLabel.TabIndex = 6;
-            this.CityLabel.Text = "City";
+            this.EmailLabel.AutoSize = true;
+            this.EmailLabel.Location = new System.Drawing.Point(3, 333);
+            this.EmailLabel.Name = "EmailLabel";
+            this.EmailLabel.Size = new System.Drawing.Size(32, 13);
+            this.EmailLabel.TabIndex = 16;
+            this.EmailLabel.Text = "Email";
             // 
-            // CityField
+            // WorkNumberLabel
             // 
-            this.CityField.Location = new System.Drawing.Point(196, 120);
-            this.CityField.Name = "CityField";
-            this.CityField.Size = new System.Drawing.Size(188, 20);
-            this.CityField.TabIndex = 7;
+            this.WorkNumberLabel.AutoSize = true;
+            this.WorkNumberLabel.Location = new System.Drawing.Point(3, 296);
+            this.WorkNumberLabel.Name = "WorkNumberLabel";
+            this.WorkNumberLabel.Size = new System.Drawing.Size(73, 13);
+            this.WorkNumberLabel.TabIndex = 14;
+            this.WorkNumberLabel.Text = "Work Number";
             // 
-            // ProvinceLabel
+            // HomeNumberLabel
             // 
-            this.ProvinceLabel.AutoSize = true;
-            this.ProvinceLabel.Location = new System.Drawing.Point(3, 156);
-            this.ProvinceLabel.Name = "ProvinceLabel";
-            this.ProvinceLabel.Size = new System.Drawing.Size(49, 13);
-            this.ProvinceLabel.TabIndex = 8;
-            this.ProvinceLabel.Text = "Province";
+            this.HomeNumberLabel.AutoSize = true;
+            this.HomeNumberLabel.Location = new System.Drawing.Point(3, 259);
+            this.HomeNumberLabel.Name = "HomeNumberLabel";
+            this.HomeNumberLabel.Size = new System.Drawing.Size(75, 13);
+            this.HomeNumberLabel.TabIndex = 12;
+            this.HomeNumberLabel.Text = "Home Number";
+            // 
+            // PostalCodeLabel
+            // 
+            this.PostalCodeLabel.AutoSize = true;
+            this.PostalCodeLabel.Location = new System.Drawing.Point(3, 222);
+            this.PostalCodeLabel.Name = "PostalCodeLabel";
+            this.PostalCodeLabel.Size = new System.Drawing.Size(64, 13);
+            this.PostalCodeLabel.TabIndex = 10;
+            this.PostalCodeLabel.Text = "Postal Code";
+            // 
+            // PostalCodeField
+            // 
+            this.PostalCodeField.Location = new System.Drawing.Point(196, 225);
+            this.PostalCodeField.Name = "PostalCodeField";
+            this.PostalCodeField.Size = new System.Drawing.Size(188, 20);
+            this.PostalCodeField.TabIndex = 11;
+            // 
+            // StreetAddressField
+            // 
+            this.StreetAddressField.Location = new System.Drawing.Point(196, 114);
+            this.StreetAddressField.Name = "StreetAddressField";
+            this.StreetAddressField.Size = new System.Drawing.Size(188, 20);
+            this.StreetAddressField.TabIndex = 6;
             // 
             // ProvinceField
             // 
@@ -444,74 +496,44 @@
             "Quebec",
             "Saskatchewan",
             "Yukon"});
-            this.ProvinceField.Location = new System.Drawing.Point(196, 159);
+            this.ProvinceField.Location = new System.Drawing.Point(196, 188);
             this.ProvinceField.Name = "ProvinceField";
             this.ProvinceField.Size = new System.Drawing.Size(188, 21);
             this.ProvinceField.TabIndex = 9;
             // 
-            // PostalCodeLabel
+            // CityField
             // 
-            this.PostalCodeLabel.AutoSize = true;
-            this.PostalCodeLabel.Location = new System.Drawing.Point(3, 195);
-            this.PostalCodeLabel.Name = "PostalCodeLabel";
-            this.PostalCodeLabel.Size = new System.Drawing.Size(64, 13);
-            this.PostalCodeLabel.TabIndex = 10;
-            this.PostalCodeLabel.Text = "Postal Code";
+            this.CityField.Location = new System.Drawing.Point(196, 151);
+            this.CityField.Name = "CityField";
+            this.CityField.Size = new System.Drawing.Size(188, 20);
+            this.CityField.TabIndex = 7;
             // 
-            // PostalCodeField
+            // ProvinceLabel
             // 
-            this.PostalCodeField.Location = new System.Drawing.Point(196, 198);
-            this.PostalCodeField.Name = "PostalCodeField";
-            this.PostalCodeField.Size = new System.Drawing.Size(188, 20);
-            this.PostalCodeField.TabIndex = 11;
+            this.ProvinceLabel.AutoSize = true;
+            this.ProvinceLabel.Location = new System.Drawing.Point(3, 185);
+            this.ProvinceLabel.Name = "ProvinceLabel";
+            this.ProvinceLabel.Size = new System.Drawing.Size(49, 13);
+            this.ProvinceLabel.TabIndex = 8;
+            this.ProvinceLabel.Text = "Province";
             // 
-            // HomeNumberLabel
+            // CityLabel
             // 
-            this.HomeNumberLabel.AutoSize = true;
-            this.HomeNumberLabel.Location = new System.Drawing.Point(3, 234);
-            this.HomeNumberLabel.Name = "HomeNumberLabel";
-            this.HomeNumberLabel.Size = new System.Drawing.Size(75, 13);
-            this.HomeNumberLabel.TabIndex = 12;
-            this.HomeNumberLabel.Text = "Home Number";
+            this.CityLabel.AutoSize = true;
+            this.CityLabel.Location = new System.Drawing.Point(3, 148);
+            this.CityLabel.Name = "CityLabel";
+            this.CityLabel.Size = new System.Drawing.Size(24, 13);
+            this.CityLabel.TabIndex = 6;
+            this.CityLabel.Text = "City";
             // 
-            // textBox2
+            // StreetAddressLabel
             // 
-            this.textBox2.Location = new System.Drawing.Point(196, 237);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(188, 20);
-            this.textBox2.TabIndex = 13;
-            // 
-            // WorkNumberLabel
-            // 
-            this.WorkNumberLabel.AutoSize = true;
-            this.WorkNumberLabel.Location = new System.Drawing.Point(3, 273);
-            this.WorkNumberLabel.Name = "WorkNumberLabel";
-            this.WorkNumberLabel.Size = new System.Drawing.Size(73, 13);
-            this.WorkNumberLabel.TabIndex = 14;
-            this.WorkNumberLabel.Text = "Work Number";
-            // 
-            // WorkNumberField
-            // 
-            this.WorkNumberField.Location = new System.Drawing.Point(196, 276);
-            this.WorkNumberField.Name = "WorkNumberField";
-            this.WorkNumberField.Size = new System.Drawing.Size(188, 20);
-            this.WorkNumberField.TabIndex = 15;
-            // 
-            // EmailField
-            // 
-            this.EmailField.Location = new System.Drawing.Point(196, 315);
-            this.EmailField.Name = "EmailField";
-            this.EmailField.Size = new System.Drawing.Size(188, 20);
-            this.EmailField.TabIndex = 17;
-            // 
-            // EmailLabel
-            // 
-            this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(3, 312);
-            this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(32, 13);
-            this.EmailLabel.TabIndex = 16;
-            this.EmailLabel.Text = "Email";
+            this.StreetAddressLabel.AutoSize = true;
+            this.StreetAddressLabel.Location = new System.Drawing.Point(3, 111);
+            this.StreetAddressLabel.Name = "StreetAddressLabel";
+            this.StreetAddressLabel.Size = new System.Drawing.Size(76, 13);
+            this.StreetAddressLabel.TabIndex = 37;
+            this.StreetAddressLabel.Text = "Street Address";
             // 
             // SubmitEntryButton
             // 
@@ -577,8 +599,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.MainTab.ResumeLayout(false);
-            this.FirstNameField.ResumeLayout(false);
-            this.FirstNameField.PerformLayout();
+            this.DataEntryTab.ResumeLayout(false);
+            this.DataEntryTab.PerformLayout();
             this.RTWInformationTable.ResumeLayout(false);
             this.RTWInformationTable.PerformLayout();
             this.PersonalInformationTable.ResumeLayout(false);
@@ -597,7 +619,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
         private System.Windows.Forms.TabControl MainTab;
-        private System.Windows.Forms.TabPage FirstNameField;
+        private System.Windows.Forms.TabPage DataEntryTab;
         private System.Windows.Forms.TabPage ReportsTab;
         private System.Windows.Forms.TabPage NotificationsTab;
         private System.Windows.Forms.Label FirstNameLabel;
@@ -628,15 +650,17 @@
         private System.Windows.Forms.TableLayoutPanel RTWInformationTable;
         private System.Windows.Forms.TableLayoutPanel PersonalInformationTable;
         private System.Windows.Forms.TextBox EmployeeNumberField;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox FirstNameField;
         private System.Windows.Forms.TextBox LastNameField;
         private System.Windows.Forms.TextBox CityField;
         private System.Windows.Forms.ComboBox ProvinceField;
         private System.Windows.Forms.TextBox PostalCodeField;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox HomeNumberField;
         private System.Windows.Forms.TextBox WorkNumberField;
         private System.Windows.Forms.RadioButton ExistingPersonButton;
         private System.Windows.Forms.ComboBox ExistingPersonSearchField;
+        private System.Windows.Forms.Label StreetAddressLabel;
+        private System.Windows.Forms.TextBox StreetAddressField;
     }
 }
 

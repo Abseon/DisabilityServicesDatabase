@@ -44,22 +44,34 @@ namespace DisabilityServiceDatabase
         private void SubmitEntryButton_Click(object sender, EventArgs e)
         {
             // On submit button press all entered data is added as a DataEntry object to AddedEntries
-            //TO DO
             DataEntry NewEntry = new DataEntry();
             if (EmployeeNumberField.Text != "")
             {
+                // Potentially find a better way to fill these
                 NewEntry.PersonalFields["Employment Number"] = EmployeeNumberField.Text;
+                NewEntry.PersonalFields["First Name"] = FirstNameField.Text;
+                NewEntry.PersonalFields["Last Name"] = LastNameField.Text;
+                NewEntry.PersonalFields["Street Address"] = StreetAddressField.Text;
+                NewEntry.PersonalFields["City"] = CityField.Text;
+                NewEntry.PersonalFields["Province"] = ProvinceField.Text;
+                NewEntry.PersonalFields["Phone Number (Home)"] = HomeNumberField.Text;
+                NewEntry.PersonalFields["Phone Number (Work)"] = WorkNumberField.Text;
+                NewEntry.PersonalFields["Email"] = EmailField.Text;
 
                 NewEntry.RTWFields["Employment Number"] = EmployeeNumberField.Text;
-                //TO DO: Rest of fields
+                NewEntry.RTWFields["LTD Eligible"] = LTDEligibleField.Checked;
+                NewEntry.RTWFields["Referral Recieved"] = ReferralReceivedField.Value;
+                NewEntry.RTWFields["Start Date"] = StartDateField.Value;
+                NewEntry.RTWFields["Hours Worked/Day"] = DailyHoursWorkedField.Text;
+                NewEntry.RTWFields["Hourly Salary"] = HourlySalaryField.Text;
+
+                //Potentially add calculated fields, otherwise let database fill them
                 AddedEntries.Add(NewEntry);
             }
             else
             {
                 // TO DO: ERROR TEXT BOX as employee # is critical
             }
-            
-            Debug.WriteLine("CLICKED");
         }
 
         // Custom Functions
