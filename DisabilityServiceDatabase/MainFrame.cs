@@ -36,14 +36,19 @@ namespace DisabilityServiceDatabase
         private void ExistingPersonButton_Click(object sender, EventArgs e)
         {
             // Switches from Personal Input to an existing person search
-            // TO DO: Vanish Personal input and Display person search
+            ExistingPerson = !ExistingPerson;
             PersonalInformationTable.Visible = !PersonalInformationTable.Visible;
-            ExistingPersonButton.Checked = !ExistingPersonButton.Checked;
             ExistingPersonSearchField.Visible = !ExistingPersonSearchField.Visible;
+            ExistingPersonButton.Checked = ExistingPerson;
+            if (ExistingPerson)
+            {
+                FillExistingPersonSearch();
+            }
         }
         private void SubmitEntryButton_Click(object sender, EventArgs e)
         {
             // On submit button press all entered data is added as a DataEntry object to AddedEntries
+            // TO DO: Write alternate case for ExistingPerson == True 
             DataEntry NewEntry = new DataEntry();
             if (EmployeeNumberField.Text != "")
             {
@@ -73,7 +78,12 @@ namespace DisabilityServiceDatabase
                 // TO DO: ERROR TEXT BOX as employee # is critical
             }
         }
-
+        private void FillExistingPersonSearch()
+        {
+            // Fills the Existing Person Search Field with the names of people currently in the database
+            // Then points to the associated Data entry instead of the fields for Submit entry
+            // TO DO: The Above
+        }
         // Custom Functions
         private Boolean DatabaseRead(String commandString)
         {

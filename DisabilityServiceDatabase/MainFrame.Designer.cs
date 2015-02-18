@@ -167,7 +167,7 @@
             "HIM",
             "HER",
             "IT"});
-            this.ExistingPersonSearchField.Location = new System.Drawing.Point(118, 42);
+            this.ExistingPersonSearchField.Location = new System.Drawing.Point(118, 44);
             this.ExistingPersonSearchField.Name = "ExistingPersonSearchField";
             this.ExistingPersonSearchField.Size = new System.Drawing.Size(288, 21);
             this.ExistingPersonSearchField.TabIndex = 36;
@@ -180,7 +180,6 @@
             this.ExistingPersonButton.Name = "ExistingPersonButton";
             this.ExistingPersonButton.Size = new System.Drawing.Size(103, 17);
             this.ExistingPersonButton.TabIndex = 35;
-            this.ExistingPersonButton.TabStop = true;
             this.ExistingPersonButton.Text = "Existing Person?";
             this.ExistingPersonButton.UseVisualStyleBackColor = true;
             this.ExistingPersonButton.Click += new System.EventHandler(this.ExistingPersonButton_Click);
@@ -202,7 +201,7 @@
             this.RTWInformationTable.Controls.Add(this.HourlySalaryLabel, 0, 4);
             this.RTWInformationTable.Controls.Add(this.StartDateLabel, 0, 3);
             this.RTWInformationTable.Controls.Add(this.StartDateField, 1, 3);
-            this.RTWInformationTable.Location = new System.Drawing.Point(486, 62);
+            this.RTWInformationTable.Location = new System.Drawing.Point(553, 88);
             this.RTWInformationTable.Name = "RTWInformationTable";
             this.RTWInformationTable.RowCount = 6;
             this.RTWInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
@@ -343,7 +342,7 @@
             this.PersonalInformationTable.Controls.Add(this.ProvinceLabel, 0, 5);
             this.PersonalInformationTable.Controls.Add(this.CityLabel, 0, 4);
             this.PersonalInformationTable.Controls.Add(this.StreetAddressLabel, 0, 3);
-            this.PersonalInformationTable.Location = new System.Drawing.Point(19, 62);
+            this.PersonalInformationTable.Location = new System.Drawing.Point(50, 88);
             this.PersonalInformationTable.Name = "PersonalInformationTable";
             this.PersonalInformationTable.RowCount = 10;
             this.PersonalInformationTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
@@ -537,7 +536,7 @@
             // 
             // SubmitEntryButton
             // 
-            this.SubmitEntryButton.Location = new System.Drawing.Point(486, 336);
+            this.SubmitEntryButton.Location = new System.Drawing.Point(553, 342);
             this.SubmitEntryButton.Name = "SubmitEntryButton";
             this.SubmitEntryButton.Size = new System.Drawing.Size(387, 23);
             this.SubmitEntryButton.TabIndex = 32;
@@ -549,7 +548,7 @@
             // 
             this.RTWInformationLabel.AutoSize = true;
             this.RTWInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.RTWInformationLabel.Location = new System.Drawing.Point(562, 19);
+            this.RTWInformationLabel.Location = new System.Drawing.Point(673, 21);
             this.RTWInformationLabel.Name = "RTWInformationLabel";
             this.RTWInformationLabel.Size = new System.Drawing.Size(130, 20);
             this.RTWInformationLabel.TabIndex = 19;
