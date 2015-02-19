@@ -172,6 +172,7 @@
             this.ExistingPersonSearchField.Size = new System.Drawing.Size(288, 21);
             this.ExistingPersonSearchField.TabIndex = 36;
             this.ExistingPersonSearchField.Visible = false;
+            this.ExistingPersonSearchField.SelectedValueChanged += new System.EventHandler(this.ExistingPersonSearchField_Changed);
             // 
             // ExistingPersonButton
             // 

@@ -20,6 +20,10 @@ namespace DisabilityServiceDatabase
         private List<DataEntry> AddedEntries = new List<DataEntry>();
         // Boolean representing the status of data entry, defaults to false for !existingPerson
         Boolean ExistingPerson = false;
+        // Reference list translating a Last Name, First Name String to an employee number used by ExistingSearch
+        private Dictionary<String, int> ReferenceTable = new Dictionary<string, int>(); // Change Name?
+        // Existing person data
+        private DataEntry ExistingPersonReference = null;
 
         public MainFrame()
         {
@@ -48,20 +52,36 @@ namespace DisabilityServiceDatabase
         private void SubmitEntryButton_Click(object sender, EventArgs e)
         {
             // On submit button press all entered data is added as a DataEntry object to AddedEntries
-            // TO DO: Write alternate case for ExistingPerson == True 
             DataEntry NewEntry = new DataEntry();
-            if (EmployeeNumberField.Text != "")
+            if (EmployeeNumberField.Text != "" || ExistingPerson)
             {
+                
+                if (ExistingPerson && ExistingPersonReference != null) {
+                    // Use Existing Person to fill instead of fields
+                    NewEntry.PersonalFields["Employment Number"] = ExistingPersonReference.PersonalFields["Employment Number"];
+                    NewEntry.PersonalFields["First Name"] = ExistingPersonReference.PersonalFields["First Name"];
+                    NewEntry.PersonalFields["Last Name"] = ExistingPersonReference.PersonalFields["Last Name"];
+                    NewEntry.PersonalFields["Street Address"] = ExistingPersonReference.PersonalFields["Street Address"];
+                    NewEntry.PersonalFields["City"] = ExistingPersonReference.PersonalFields["City"];
+                    NewEntry.PersonalFields["Province"] = ExistingPersonReference.PersonalFields["Province"];
+                    NewEntry.PersonalFields["Phone Number (Home)"] = ExistingPersonReference.PersonalFields["Phone Number (Home)"];
+                    NewEntry.PersonalFields["Phone Number (Work)"] = ExistingPersonReference.PersonalFields["Phone Number (Work)"];
+                    NewEntry.PersonalFields["Email"] = ExistingPersonReference.PersonalFields["Email"];
+                }
+                else
+                {
+                    NewEntry.PersonalFields["Employment Number"] = EmployeeNumberField.Text;
+                    NewEntry.PersonalFields["First Name"] = FirstNameField.Text;
+                    NewEntry.PersonalFields["Last Name"] = LastNameField.Text;
+                    NewEntry.PersonalFields["Street Address"] = StreetAddressField.Text;
+                    NewEntry.PersonalFields["City"] = CityField.Text;
+                    NewEntry.PersonalFields["Province"] = ProvinceField.Text;
+                    NewEntry.PersonalFields["Phone Number (Home)"] = HomeNumberField.Text;
+                    NewEntry.PersonalFields["Phone Number (Work)"] = WorkNumberField.Text;
+                    NewEntry.PersonalFields["Email"] = EmailField.Text;
+                }
                 // Potentially find a better way to fill these
-                NewEntry.PersonalFields["Employment Number"] = EmployeeNumberField.Text;
-                NewEntry.PersonalFields["First Name"] = FirstNameField.Text;
-                NewEntry.PersonalFields["Last Name"] = LastNameField.Text;
-                NewEntry.PersonalFields["Street Address"] = StreetAddressField.Text;
-                NewEntry.PersonalFields["City"] = CityField.Text;
-                NewEntry.PersonalFields["Province"] = ProvinceField.Text;
-                NewEntry.PersonalFields["Phone Number (Home)"] = HomeNumberField.Text;
-                NewEntry.PersonalFields["Phone Number (Work)"] = WorkNumberField.Text;
-                NewEntry.PersonalFields["Email"] = EmailField.Text;
+                
 
                 NewEntry.RTWFields["Employment Number"] = EmployeeNumberField.Text;
                 NewEntry.RTWFields["LTD Eligible"] = LTDEligibleField.Checked;
@@ -78,11 +98,44 @@ namespace DisabilityServiceDatabase
                 // TO DO: ERROR TEXT BOX as employee # is critical
             }
         }
+        private void ExistingPersonSearchField_Changed(object sender, EventArgs e)
+        {
+            // On Person select switch the Existing Person reference
+            String CurrentPerson = ExistingPersonSearchField.SelectedItem.ToString();
+            int SearchID = ReferenceTable[CurrentPerson];
+            foreach (DataEntry item in MainDatabase)
+            {
+                if (item.ContainsPersonalInfo)
+                {
+                    if (item.PersonalFields["Employment Number"].ToString() == SearchID.ToString())
+                    {
+                        ExistingPersonReference = item;
+                    }
+                }
+            }
+        }
         private void FillExistingPersonSearch()
         {
             // Fills the Existing Person Search Field with the names of people currently in the database
-            // Then points to the associated Data entry instead of the fields for Submit entry
-            // TO DO: The Above
+            List<String> FillList = new List<String>();
+            // Resets Reference Table and Sxisting SearchField to be filled 
+            ReferenceTable = new Dictionary<string, int>();
+            ExistingPersonSearchField.Items.Clear();
+            foreach (DataEntry item in MainDatabase)
+            {
+                if (item.ContainsPersonalInfo)
+                {
+                    String FillString = item.PersonalFields["Last Name"].ToString() + "," + item.PersonalFields["First Name"].ToString();
+                    FillList.Add(FillString);
+                    ReferenceTable.Add(FillString, Convert.ToInt32(item.PersonalFields["Employment Number"])); // Note potential error if not convertable !!!
+
+                }
+            }
+            FillList.Sort();
+            foreach (String name in FillList)
+            {
+                ExistingPersonSearchField.Items.Add(name);
+            }
         }
         // Custom Functions
         private Boolean DatabaseRead(String commandString)
