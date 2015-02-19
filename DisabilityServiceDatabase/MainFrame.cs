@@ -93,6 +93,7 @@ namespace DisabilityServiceDatabase
 
                 //Potentially add calculated fields, otherwise let database fill them
                 AddedEntries.Add(NewEntry);
+                ClearFields();
             }
             else
             {
@@ -216,6 +217,23 @@ namespace DisabilityServiceDatabase
                 return false;
             }
             
+        }
+        private void ClearFields()
+        {
+            foreach (Control Cont in PersonalInformationTable.Controls)
+            {
+                if (Cont is TextBox)
+                {
+                    Cont.ResetText();
+                }
+            }
+            foreach (Control Cont in RTWInformationTable.Controls)
+            {
+                if (Cont is TextBox)
+                {
+                    Cont.ResetText();
+                }
+            }
         }
 
     }
