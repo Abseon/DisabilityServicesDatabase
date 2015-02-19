@@ -55,7 +55,7 @@ namespace DisabilityServiceDatabase
             DataEntry NewEntry = new DataEntry();
             if (EmployeeNumberField.Text != "" || ExistingPerson)
             {
-                
+                // Potentially find a better way to fill these
                 if (ExistingPerson && ExistingPersonReference != null) {
                     // Use Existing Person to fill instead of fields
                     NewEntry.PersonalFields["Employment Number"] = ExistingPersonReference.PersonalFields["Employment Number"];
@@ -80,15 +80,16 @@ namespace DisabilityServiceDatabase
                     NewEntry.PersonalFields["Phone Number (Work)"] = WorkNumberField.Text;
                     NewEntry.PersonalFields["Email"] = EmailField.Text;
                 }
-                // Potentially find a better way to fill these
-                
-
+               
                 NewEntry.RTWFields["Employment Number"] = EmployeeNumberField.Text;
                 NewEntry.RTWFields["LTD Eligible"] = LTDEligibleField.Checked;
                 NewEntry.RTWFields["Referral Recieved"] = ReferralReceivedField.Value;
                 NewEntry.RTWFields["Start Date"] = StartDateField.Value;
                 NewEntry.RTWFields["Hours Worked/Day"] = DailyHoursWorkedField.Text;
                 NewEntry.RTWFields["Hourly Salary"] = HourlySalaryField.Text;
+
+                NewEntry.ContainsCaseInfo = true;
+                NewEntry.ContainsPersonalInfo = true;
 
                 //Potentially add calculated fields, otherwise let database fill them
                 AddedEntries.Add(NewEntry);
