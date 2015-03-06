@@ -37,6 +37,7 @@
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTab = new System.Windows.Forms.TabControl();
             this.DataEntryTab = new System.Windows.Forms.TabPage();
+            this.PublishButton = new System.Windows.Forms.Button();
             this.ExistingPersonSearchField = new System.Windows.Forms.ComboBox();
             this.ExistingPersonButton = new System.Windows.Forms.RadioButton();
             this.RTWInformationTable = new System.Windows.Forms.TableLayoutPanel();
@@ -144,6 +145,7 @@
             // 
             // DataEntryTab
             // 
+            this.DataEntryTab.Controls.Add(this.PublishButton);
             this.DataEntryTab.Controls.Add(this.ExistingPersonSearchField);
             this.DataEntryTab.Controls.Add(this.ExistingPersonButton);
             this.DataEntryTab.Controls.Add(this.RTWInformationTable);
@@ -158,6 +160,17 @@
             this.DataEntryTab.TabIndex = 0;
             this.DataEntryTab.Text = "Data Entry";
             this.DataEntryTab.UseVisualStyleBackColor = true;
+            // 
+            // PublishButton
+            // 
+            this.PublishButton.Location = new System.Drawing.Point(553, 385);
+            this.PublishButton.Name = "PublishButton";
+            this.PublishButton.Size = new System.Drawing.Size(387, 23);
+            this.PublishButton.TabIndex = 37;
+            this.PublishButton.Text = "Publish Entries";
+            this.PublishButton.UseVisualStyleBackColor = true;
+            this.PublishButton.Visible = false;
+            this.PublishButton.Click += new System.EventHandler(this.PublishButton_Click);
             // 
             // ExistingPersonSearchField
             // 
@@ -661,6 +674,7 @@
         private System.Windows.Forms.ComboBox ExistingPersonSearchField;
         private System.Windows.Forms.Label StreetAddressLabel;
         private System.Windows.Forms.TextBox StreetAddressField;
+        private System.Windows.Forms.Button PublishButton;
     }
 }
 

@@ -53,10 +53,11 @@ namespace DisabilityServiceDatabase
         {
             // On submit button press all entered data is added as a DataEntry object to AddedEntries
             DataEntry NewEntry = new DataEntry();
-            if (EmployeeNumberField.Text != "" || ExistingPerson)
+            int test;
+            if ((EmployeeNumberField.Text != "" && Int32.TryParse(EmployeeNumberField.Text,out test)) || ExistingPerson)
             {
                 // Potentially find a better way to fill these
-                if (ExistingPerson && ExistingPersonReference != null) {
+                if (ExistingPerson && ExistingPersonReference != null ) {
                     // Use Existing Person to fill instead of fields
                     NewEntry.PersonalFields["Employment Number"] = ExistingPersonReference.PersonalFields["Employment Number"];
                     NewEntry.PersonalFields["First Name"] = ExistingPersonReference.PersonalFields["First Name"];
@@ -64,34 +65,61 @@ namespace DisabilityServiceDatabase
                     NewEntry.PersonalFields["Street Address"] = ExistingPersonReference.PersonalFields["Street Address"];
                     NewEntry.PersonalFields["City"] = ExistingPersonReference.PersonalFields["City"];
                     NewEntry.PersonalFields["Province"] = ExistingPersonReference.PersonalFields["Province"];
+                    NewEntry.PersonalFields["Postal Code"] = ExistingPersonReference.PersonalFields["Postal Code"];
                     NewEntry.PersonalFields["Phone Number (Home)"] = ExistingPersonReference.PersonalFields["Phone Number (Home)"];
                     NewEntry.PersonalFields["Phone Number (Work)"] = ExistingPersonReference.PersonalFields["Phone Number (Work)"];
                     NewEntry.PersonalFields["Email"] = ExistingPersonReference.PersonalFields["Email"];
+                    NewEntry.RTWFields["Employee Number"] = ExistingPersonReference.PersonalFields["Employment Number"];
+                    NewEntry.ExistingPerson = true;
                 }
                 else
                 {
-                    NewEntry.PersonalFields["Employment Number"] = EmployeeNumberField.Text;
+                    NewEntry.PersonalFields["Employment Number"] = Int32.Parse(EmployeeNumberField.Text);
                     NewEntry.PersonalFields["First Name"] = FirstNameField.Text;
                     NewEntry.PersonalFields["Last Name"] = LastNameField.Text;
                     NewEntry.PersonalFields["Street Address"] = StreetAddressField.Text;
                     NewEntry.PersonalFields["City"] = CityField.Text;
                     NewEntry.PersonalFields["Province"] = ProvinceField.Text;
+                    NewEntry.PersonalFields["Postal Code"] = PostalCodeField.Text;
                     NewEntry.PersonalFields["Phone Number (Home)"] = HomeNumberField.Text;
                     NewEntry.PersonalFields["Phone Number (Work)"] = WorkNumberField.Text;
                     NewEntry.PersonalFields["Email"] = EmailField.Text;
+                    NewEntry.RTWFields["Employee Number"] = Int32.Parse(EmployeeNumberField.Text);
                 }
-               
-                NewEntry.RTWFields["Employment Number"] = EmployeeNumberField.Text;
+
+                NewEntry.RTWFields["Status"] = StatusField.Text;
                 NewEntry.RTWFields["LTD Eligible"] = LTDEligibleField.Checked;
                 NewEntry.RTWFields["Referral Recieved"] = ReferralReceivedField.Value;
-                NewEntry.RTWFields["Start Date"] = StartDateField.Value;
-                NewEntry.RTWFields["Hours Worked/Day"] = DailyHoursWorkedField.Text;
-                NewEntry.RTWFields["Hourly Salary"] = HourlySalaryField.Text;
+                NewEntry.RTWFields["Sick Leave Start"] = StartDateField.Value;
 
+                // Because these are currency types it converts to decimal if possible otherwise defaults to 0 // Probably change to 0 on "" else error
+                decimal testDecimal;
+                if (Decimal.TryParse(DailyHoursWorkedField.Text,out testDecimal))
+                {
+                    NewEntry.RTWFields["Hours Worked/Day"] = Decimal.Parse(DailyHoursWorkedField.Text);
+                } 
+                else
+                {
+                    NewEntry.RTWFields["Hours Worked/Day"] = 0m;
+                }
+                if (Decimal.TryParse(HourlySalaryField.Text, out testDecimal))
+                {
+                    NewEntry.RTWFields["Hourly Salary"] = Decimal.Parse(HourlySalaryField.Text);
+                }
+                else
+                {
+                    NewEntry.RTWFields["Hourly Salary"] = 0m;
+                }
+                
                 NewEntry.ContainsCaseInfo = true;
                 NewEntry.ContainsPersonalInfo = true;
 
                 //Potentially add calculated fields, otherwise let database fill them
+                if (AddedEntries.Count == 0)
+                {
+                    // Sets up option to publish
+                    PublishButton.Visible = true;
+                }
                 AddedEntries.Add(NewEntry);
                 ClearFields();
             }
@@ -99,6 +127,28 @@ namespace DisabilityServiceDatabase
             {
                 // TO DO: ERROR TEXT BOX as employee # is critical
             }
+        }
+        private void PublishButton_Click(object sender, EventArgs e)
+        {
+            // Confirms publish then iterates through added entries and writes them to the Database
+            String plural;
+            if (AddedEntries.Count == 1)
+            {
+                plural = " entry ";
+            }
+            else
+            {
+                plural = " entries ";
+            }
+            if (MessageBox.Show("There are " + AddedEntries.Count.ToString() + plural + "to be Published\n Proceed?", "Publish", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+            {
+                foreach (DataEntry inputEntry in AddedEntries)
+                {
+                    DatabaseWrite(inputEntry);
+                }
+                PublishButton.Visible = false;
+            }
+            
         }
         private void ExistingPersonSearchField_Changed(object sender, EventArgs e)
         {
@@ -196,7 +246,7 @@ namespace DisabilityServiceDatabase
                     {
                         // Reads the values into a Data Entry - this is order dependent
                         DataEntry ReadEntry = new DataEntry();
-                        String[] CaseFields = new String[26] { "ID", "Employee Number", "LTD Eligible", "Referral Recieved", "Sick Leave Start", "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required",
+                        String[] CaseFields = new String[27] { "ID", "Employee Number","Status", "LTD Eligible", "Referral Recieved", "Sick Leave Start", "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required",
                             "LTD Application Sent", "Employee Stat to GWL","Benefits Sheet Required","Day 160","Day 181 + 3 Months","Benefits Sheet Sent","Benefits Sheet Recieved","Accomodation Start Date",
                             "Return to Work","Return to Work Date","Return To Work Follow-Up","RTW Follow-Up Complete","Return To Work End Plan","Accomodation Follow-Up","Number of Days Absent","Hourly Salary",
                             "Hours Worked/Day","SL Cost/Day"}; // Consider replacing with reference
@@ -213,11 +263,114 @@ namespace DisabilityServiceDatabase
             }
             catch (Exception ex)
             {
+                // DB should always close
+                DatabaseConnection.Close();
                 Debug.WriteLine(ex.Message); //Should eventually produce a pop-up with retry option
                 return false;
             }
             
         }
+        private Boolean DatabaseWrite(DataEntry inputEntry)
+        {
+            // Writes a given inputEntry to the Access Database
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Sean\Documents\DisabilityServicesDB.accdb;Persist Security Info=False;"; //Temporarily referencing a static location
+            string EmployeeInsertCommand = "INSERT INTO Employees (";
+            string CaseInsertCommand = "INSERT INTO CaseInfo (";
+            
+            // Writing Insert Command strings !!!
+            String[] EmployeeFields = new String[10] { "Employment Number", "Last Name", "First Name", "Street Address", "City", "Province", "Postal Code", "Phone Number (Home)", "Phone Number (Work)", "Email" }; // Consider replacing with reference // Also may differ from actual DB
+            for (int i = 0; i < EmployeeFields.Length; i++)
+            {
+                EmployeeInsertCommand += "`" + EmployeeFields[i] + "`";
+                if (i != EmployeeFields.Length - 1)
+                {
+                    EmployeeInsertCommand += ",";
+                }
+            }
+            EmployeeInsertCommand += ") VALUES (";
+            if (!inputEntry.ExistingPerson)
+            {
+                for (int i = 0; i < EmployeeFields.Length; i++)
+                {
+                    object entryValue = inputEntry.PersonalFields[EmployeeFields[i]];
+                    if (entryValue is int)
+                    {
+                        EmployeeInsertCommand += entryValue.ToString();
+                    }
+                    else
+                    {
+                        EmployeeInsertCommand += "\"" + entryValue.ToString() + "\"";
+                    }
+                    if (i != EmployeeFields.Length - 1)
+                    {
+                        EmployeeInsertCommand += ",";
+                    }
+                }
+            }
+            EmployeeInsertCommand += ")";
+
+            String[] CaseFields = new String[7] { "Employee Number","Status", "LTD Eligible", "Referral Recieved", "Sick Leave Start","Hourly Salary","Hours Worked/Day"}; //Replace with reference probably //Ignores ID and non filled fields
+            for (int i = 0; i < CaseFields.Length; i++)
+            {
+                CaseInsertCommand += "`" + CaseFields[i] + "`";
+                if (i != CaseFields.Length - 1)
+                {
+                    CaseInsertCommand += ",";
+                }
+            }
+            CaseInsertCommand += ") VALUES (";
+            for (int i = 0; i < CaseFields.Length; i++)
+            {
+                object entryValue = inputEntry.RTWFields[CaseFields[i]];
+                if (entryValue == null)
+                {
+                    entryValue = "";
+                }
+                if (entryValue is int || entryValue is bool || entryValue is decimal)
+                {
+                    CaseInsertCommand += entryValue.ToString();
+                } 
+                else
+                {
+                    CaseInsertCommand += "\"" + entryValue.ToString() + "\"";
+                }
+                if (i != CaseFields.Length - 1)
+                {
+                    CaseInsertCommand += ",";
+                }
+            }
+            CaseInsertCommand += ")";
+            Debug.WriteLine(EmployeeInsertCommand);
+            Debug.WriteLine(CaseInsertCommand);
+
+            OleDbConnection DatabaseConnection = new OleDbConnection(ConnectionString);
+            OleDbCommand EmployeeCommand = new OleDbCommand(EmployeeInsertCommand, DatabaseConnection);
+            OleDbCommand CaseCommand = new OleDbCommand(CaseInsertCommand, DatabaseConnection);
+
+            // Attempts to Connect to the database
+            try
+            {
+
+                DatabaseConnection.Open();
+                // DB Access Here is the first table as there is only one because of the query
+                if (!inputEntry.ExistingPerson)
+                {
+                    EmployeeCommand.ExecuteNonQuery();
+                }
+                CaseCommand.ExecuteNonQuery();
+                
+                DatabaseConnection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Make sure to close DB on fail or success
+                DatabaseConnection.Close();
+                Debug.WriteLine(ex.Message); //Should eventually produce a pop-up with retry option
+                return false;
+            }
+        }
+
         private void ClearFields()
         {
             foreach (Control Cont in PersonalInformationTable.Controls)
@@ -249,6 +402,8 @@ namespace DisabilityServiceDatabase
         // Booleans indicating the information in the field defaulted to false
         public Boolean ContainsCaseInfo = false;
         public Boolean ContainsPersonalInfo = false;
+        // Prevents Insertion of already existing person
+        public Boolean ExistingPerson = false;
     
         public DataEntry()
         {
@@ -256,6 +411,7 @@ namespace DisabilityServiceDatabase
             // Consider replacing with reference
             RTWFields.Add("ID",null);
             RTWFields.Add("Employee Number", null);
+            RTWFields.Add("Status", null);
             RTWFields.Add("LTD Eligible", null);
             RTWFields.Add("Referral Recieved", null);
             RTWFields.Add("Sick Leave Start", null);
