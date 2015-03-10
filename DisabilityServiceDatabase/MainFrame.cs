@@ -30,6 +30,9 @@ namespace DisabilityServiceDatabase
             InitializeComponent();
             DatabaseRead("Employee");
             DatabaseRead("Case");
+            SetInitial();
+            NotificationsTable.Rows.Add("Sample Name","Sample Type",DateTime.Now.ToShortDateString());
+            NotificationsTable.Rows.Add("Sample Name2", "Sample Type2", DateTime.Now.AddDays(1).ToShortDateString());
         }
 
         // Action Listeners
@@ -149,6 +152,14 @@ namespace DisabilityServiceDatabase
                 PublishButton.Visible = false;
             }
             
+        }
+        private void SortByLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void SortByField_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
         private void ExistingPersonSearchField_Changed(object sender, EventArgs e)
         {
@@ -370,7 +381,6 @@ namespace DisabilityServiceDatabase
                 return false;
             }
         }
-
         private void ClearFields()
         {
             foreach (Control Cont in PersonalInformationTable.Controls)
@@ -388,6 +398,14 @@ namespace DisabilityServiceDatabase
                 }
             }
         }
+        private void SetInitial()
+        {
+            // Sets the initial values of several fields (purely aesthetic)
+            SortByField.SelectedIndex = 0;
+            ShowExpiredField.SelectedIndex = 0;
+        }
+
+        
 
     }
     public class DataEntry
