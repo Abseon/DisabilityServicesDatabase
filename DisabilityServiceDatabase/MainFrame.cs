@@ -18,6 +18,8 @@ namespace DisabilityServiceDatabase
         private List<DataEntry> MainDatabase = new List<DataEntry>();
         // Collection Representing the Entires added during the current Session
         private List<DataEntry> AddedEntries = new List<DataEntry>();
+        // Collection To Handle Notification Dates
+        private List<Notification> Notifications = new List<Notification>();
         // Boolean representing the status of data entry, defaults to false for !existingPerson
         Boolean ExistingPerson = false;
         // Reference list translating a Last Name, First Name String to an employee number used by ExistingSearch
@@ -30,9 +32,10 @@ namespace DisabilityServiceDatabase
             InitializeComponent();
             DatabaseRead("Employee");
             DatabaseRead("Case");
+            PopulateNotifications();
+            DisplayNotifications();
             SetInitial();
-            NotificationsTable.Rows.Add("Sample Name","Sample Type",DateTime.Now.ToShortDateString());
-            NotificationsTable.Rows.Add("Sample Name2", "Sample Type2", DateTime.Now.AddDays(1).ToShortDateString());
+            // Temp Sample
         }
 
         // Action Listeners
@@ -206,7 +209,7 @@ namespace DisabilityServiceDatabase
             // Connects to the access database and reads entries into MainDatabase
             // Connect string determines the table to read or a custom command string
             // Returns true on success false on failure
-            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Sean\Documents\DisabilityServicesDB.accdb;Persist Security Info=False;"; //Temporarily referencing a static location
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Sean\Documents\DisabilityServicesDatabase.accdb;Persist Security Info=False;"; //Temporarily referencing a static location
             string StringCommand;
             switch (commandString)
             {
@@ -284,7 +287,7 @@ namespace DisabilityServiceDatabase
         private Boolean DatabaseWrite(DataEntry inputEntry)
         {
             // Writes a given inputEntry to the Access Database
-            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Sean\Documents\DisabilityServicesDB.accdb;Persist Security Info=False;"; //Temporarily referencing a static location
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Sean\Documents\DisabilityServicesDatabase.accdb;Persist Security Info=False;"; //Temporarily referencing a static location
             string EmployeeInsertCommand = "INSERT INTO Employees (";
             string CaseInsertCommand = "INSERT INTO CaseInfo (";
             
@@ -351,8 +354,6 @@ namespace DisabilityServiceDatabase
                 }
             }
             CaseInsertCommand += ")";
-            Debug.WriteLine(EmployeeInsertCommand);
-            Debug.WriteLine(CaseInsertCommand);
 
             OleDbConnection DatabaseConnection = new OleDbConnection(ConnectionString);
             OleDbCommand EmployeeCommand = new OleDbCommand(EmployeeInsertCommand, DatabaseConnection);
@@ -381,6 +382,68 @@ namespace DisabilityServiceDatabase
                 return false;
             }
         }
+        private void PopulateNotifications()
+        {
+            // Takes the inputted MainDatabase and populates a list of Notification object 
+            // for use by the notifications section
+
+            // Separates Employee and case entries
+            List<DataEntry> cases = new List<DataEntry>();
+            List<DataEntry> employees = new List<DataEntry>();
+            // Set List of Forms
+            String[] CaseDateFields = new String[] {  "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required","Benefits Sheet Required","Day 160","Day 181 + 3 Months",
+                            "Return To Work Follow-Up","Return To Work End Plan","Accomodation Follow-Up"};
+            foreach (DataEntry entry in MainDatabase)
+            {   
+                // Assumes only one is true
+                if (entry.ContainsCaseInfo)
+                {
+                    cases.Add(entry);
+                }
+                else if (entry.ContainsPersonalInfo)
+                {
+                    employees.Add(entry);
+                }
+            }
+            foreach (DataEntry caseData in cases)
+            {   
+                // First find the associated employee's name
+                String employeeName = "";
+                int caseNumber = Int32.Parse(caseData.RTWFields["ID"].ToString()); //Technically has potential for error ?
+                foreach (DataEntry employee in employees)
+                {
+                    if (employee.PersonalFields["Employment Number"].ToString() == caseData.RTWFields["Employee Number"].ToString())
+                    { 
+                        employeeName = employee.PersonalFields["Last Name"] + ", " + employee.PersonalFields["First Name"];
+                    }
+                } 
+                for (int i = 0; i < CaseDateFields.Length;i++)
+                {
+                    Notification addedNotification = new Notification();
+                    addedNotification.CaseNumber = caseNumber;
+                    if (caseData.RTWFields[CaseDateFields[i]] is DateTime)
+                    {
+                        addedNotification.NotificationDate = (DateTime) caseData.RTWFields[CaseDateFields[i]]; //Bugs if empty due to cast
+                    }
+                    addedNotification.NotificationType = CaseDateFields[i];
+                    addedNotification.EmployeeName = employeeName;
+                    Notifications.Add(addedNotification);
+                }
+
+            }
+        }
+        private void DisplayNotifications()
+        {
+            // Takes the Given Notifications List and Fills the Notification Table
+            List<Notification> SortedNotifications = Notifications.OrderBy(a => a.NotificationDate).ToList<Notification>();
+            foreach (Notification FormDate in SortedNotifications)
+            {
+                if (FormDate.NotificationDate > DateTime.Today)
+                {
+                    NotificationsTable.Rows.Add(FormDate.EmployeeName, FormDate.NotificationType, FormDate.NotificationDate.ToShortDateString());
+                }
+            }
+        }
         private void ClearFields()
         {
             foreach (Control Cont in PersonalInformationTable.Controls)
@@ -404,9 +467,6 @@ namespace DisabilityServiceDatabase
             SortByField.SelectedIndex = 0;
             ShowExpiredField.SelectedIndex = 0;
         }
-
-        
-
     }
     public class DataEntry
     {
@@ -468,5 +528,14 @@ namespace DisabilityServiceDatabase
 
         }
 
+    }
+    public class Notification
+    {
+        // A class which encapsulates basic info on a specific form to be sent
+        // as well as a reference to the DataEntry that it is based off of
+        public String EmployeeName;
+        public DateTime NotificationDate;
+        public String NotificationType;
+        public int CaseNumber;
     }
 }

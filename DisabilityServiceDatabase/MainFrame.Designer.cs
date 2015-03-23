@@ -20,7 +20,10 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        
+        
+        
+       #region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -80,13 +83,14 @@
             this.ReportsTab = new System.Windows.Forms.TabPage();
             this.NotificationsTab = new System.Windows.Forms.TabPage();
             this.NotificationsTable = new System.Windows.Forms.DataGridView();
-            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FormType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateRequired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShowExpiredLabel = new System.Windows.Forms.Label();
             this.ShowExpiredField = new System.Windows.Forms.ComboBox();
             this.SortByLabel = new System.Windows.Forms.Label();
             this.SortByField = new System.Windows.Forms.ComboBox();
+            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FormType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateRequired = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Completed = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.MainTab.SuspendLayout();
             this.DataEntryTab.SuspendLayout();
@@ -622,33 +626,13 @@
             this.NotificationsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EmployeeName,
             this.FormType,
-            this.DateRequired});
+            this.DateRequired,
+            this.Completed});
             this.NotificationsTable.Location = new System.Drawing.Point(34, 14);
             this.NotificationsTable.Name = "NotificationsTable";
             this.NotificationsTable.ShowEditingIcon = false;
-            this.NotificationsTable.Size = new System.Drawing.Size(750, 650);
+            this.NotificationsTable.Size = new System.Drawing.Size(746, 650);
             this.NotificationsTable.TabIndex = 4;
-            // 
-            // EmployeeName
-            // 
-            this.EmployeeName.HeaderText = "Employee Name";
-            this.EmployeeName.Name = "EmployeeName";
-            this.EmployeeName.ReadOnly = true;
-            this.EmployeeName.Width = 200;
-            // 
-            // FormType
-            // 
-            this.FormType.HeaderText = "Form Type";
-            this.FormType.Name = "FormType";
-            this.FormType.ReadOnly = true;
-            this.FormType.Width = 200;
-            // 
-            // DateRequired
-            // 
-            this.DateRequired.HeaderText = "Date Required By";
-            this.DateRequired.Name = "DateRequired";
-            this.DateRequired.ReadOnly = true;
-            this.DateRequired.Width = 307;
             // 
             // ShowExpiredLabel
             // 
@@ -700,6 +684,34 @@
             this.SortByField.TabIndex = 0;
             this.SortByField.SelectedIndexChanged += new System.EventHandler(this.SortByField_SelectedIndexChanged);
             // 
+            // EmployeeName
+            // 
+            this.EmployeeName.HeaderText = "Employee Name";
+            this.EmployeeName.Name = "EmployeeName";
+            this.EmployeeName.ReadOnly = true;
+            this.EmployeeName.Width = 200;
+            // 
+            // FormType
+            // 
+            this.FormType.HeaderText = "Form Type";
+            this.FormType.Name = "FormType";
+            this.FormType.ReadOnly = true;
+            this.FormType.Width = 150;
+            // 
+            // DateRequired
+            // 
+            this.DateRequired.HeaderText = "Date Required By";
+            this.DateRequired.Name = "DateRequired";
+            this.DateRequired.ReadOnly = true;
+            this.DateRequired.Width = 250;
+            // 
+            // Completed
+            // 
+            this.Completed.HeaderText = "Completed";
+            this.Completed.Name = "Completed";
+            this.Completed.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Completed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -730,6 +742,7 @@
         }
 
         #endregion
+
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -789,6 +802,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FormType;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateRequired;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Completed;
     }
 }
 
