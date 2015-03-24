@@ -81,21 +81,26 @@
             this.RTWInformationLabel = new System.Windows.Forms.Label();
             this.PersonalInformationLabel = new System.Windows.Forms.Label();
             this.ReportsTab = new System.Windows.Forms.TabPage();
+            this.ReportSelectLabel = new System.Windows.Forms.Label();
+            this.ReportSelectField = new System.Windows.Forms.ComboBox();
+            this.ReportTable = new System.Windows.Forms.DataGridView();
             this.NotificationsTab = new System.Windows.Forms.TabPage();
             this.NotificationsTable = new System.Windows.Forms.DataGridView();
-            this.ShowExpiredLabel = new System.Windows.Forms.Label();
-            this.ShowExpiredField = new System.Windows.Forms.ComboBox();
-            this.SortByLabel = new System.Windows.Forms.Label();
-            this.SortByField = new System.Windows.Forms.ComboBox();
             this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FormType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateRequired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Completed = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ShowExpiredLabel = new System.Windows.Forms.Label();
+            this.ShowExpiredField = new System.Windows.Forms.ComboBox();
+            this.SortByLabel = new System.Windows.Forms.Label();
+            this.SortByField = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.MainTab.SuspendLayout();
             this.DataEntryTab.SuspendLayout();
             this.RTWInformationTable.SuspendLayout();
             this.PersonalInformationTable.SuspendLayout();
+            this.ReportsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReportTable)).BeginInit();
             this.NotificationsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NotificationsTable)).BeginInit();
             this.SuspendLayout();
@@ -594,6 +599,9 @@
             // 
             // ReportsTab
             // 
+            this.ReportsTab.Controls.Add(this.ReportSelectLabel);
+            this.ReportsTab.Controls.Add(this.ReportSelectField);
+            this.ReportsTab.Controls.Add(this.ReportTable);
             this.ReportsTab.Location = new System.Drawing.Point(4, 22);
             this.ReportsTab.Name = "ReportsTab";
             this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -601,6 +609,39 @@
             this.ReportsTab.TabIndex = 1;
             this.ReportsTab.Text = "Reports";
             this.ReportsTab.UseVisualStyleBackColor = true;
+            // 
+            // ReportSelectLabel
+            // 
+            this.ReportSelectLabel.AutoSize = true;
+            this.ReportSelectLabel.Location = new System.Drawing.Point(1033, 27);
+            this.ReportSelectLabel.Name = "ReportSelectLabel";
+            this.ReportSelectLabel.Size = new System.Drawing.Size(66, 13);
+            this.ReportSelectLabel.TabIndex = 3;
+            this.ReportSelectLabel.Text = "Report Type";
+            this.ReportSelectLabel.Click += new System.EventHandler(this.ReportSelectLabel_Click);
+            // 
+            // ReportSelectField
+            // 
+            this.ReportSelectField.DisplayMember = " ";
+            this.ReportSelectField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ReportSelectField.FormattingEnabled = true;
+            this.ReportSelectField.Items.AddRange(new object[] {
+            "Basic View"});
+            this.ReportSelectField.Location = new System.Drawing.Point(1003, 54);
+            this.ReportSelectField.Name = "ReportSelectField";
+            this.ReportSelectField.Size = new System.Drawing.Size(131, 21);
+            this.ReportSelectField.TabIndex = 2;
+            // 
+            // ReportTable
+            // 
+            this.ReportTable.AllowUserToAddRows = false;
+            this.ReportTable.AllowUserToDeleteRows = false;
+            this.ReportTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ReportTable.Location = new System.Drawing.Point(6, 6);
+            this.ReportTable.Name = "ReportTable";
+            this.ReportTable.ReadOnly = true;
+            this.ReportTable.Size = new System.Drawing.Size(964, 684);
+            this.ReportTable.TabIndex = 0;
             // 
             // NotificationsTab
             // 
@@ -633,6 +674,34 @@
             this.NotificationsTable.ShowEditingIcon = false;
             this.NotificationsTable.Size = new System.Drawing.Size(746, 650);
             this.NotificationsTable.TabIndex = 4;
+            // 
+            // EmployeeName
+            // 
+            this.EmployeeName.HeaderText = "Employee Name";
+            this.EmployeeName.Name = "EmployeeName";
+            this.EmployeeName.ReadOnly = true;
+            this.EmployeeName.Width = 200;
+            // 
+            // FormType
+            // 
+            this.FormType.HeaderText = "Form Type";
+            this.FormType.Name = "FormType";
+            this.FormType.ReadOnly = true;
+            this.FormType.Width = 150;
+            // 
+            // DateRequired
+            // 
+            this.DateRequired.HeaderText = "Date Required By";
+            this.DateRequired.Name = "DateRequired";
+            this.DateRequired.ReadOnly = true;
+            this.DateRequired.Width = 250;
+            // 
+            // Completed
+            // 
+            this.Completed.HeaderText = "Completed";
+            this.Completed.Name = "Completed";
+            this.Completed.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Completed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ShowExpiredLabel
             // 
@@ -684,34 +753,6 @@
             this.SortByField.TabIndex = 0;
             this.SortByField.SelectedIndexChanged += new System.EventHandler(this.SortByField_SelectedIndexChanged);
             // 
-            // EmployeeName
-            // 
-            this.EmployeeName.HeaderText = "Employee Name";
-            this.EmployeeName.Name = "EmployeeName";
-            this.EmployeeName.ReadOnly = true;
-            this.EmployeeName.Width = 200;
-            // 
-            // FormType
-            // 
-            this.FormType.HeaderText = "Form Type";
-            this.FormType.Name = "FormType";
-            this.FormType.ReadOnly = true;
-            this.FormType.Width = 150;
-            // 
-            // DateRequired
-            // 
-            this.DateRequired.HeaderText = "Date Required By";
-            this.DateRequired.Name = "DateRequired";
-            this.DateRequired.ReadOnly = true;
-            this.DateRequired.Width = 250;
-            // 
-            // Completed
-            // 
-            this.Completed.HeaderText = "Completed";
-            this.Completed.Name = "Completed";
-            this.Completed.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Completed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -733,6 +774,9 @@
             this.RTWInformationTable.PerformLayout();
             this.PersonalInformationTable.ResumeLayout(false);
             this.PersonalInformationTable.PerformLayout();
+            this.ReportsTab.ResumeLayout(false);
+            this.ReportsTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReportTable)).EndInit();
             this.NotificationsTab.ResumeLayout(false);
             this.NotificationsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NotificationsTable)).EndInit();
@@ -803,6 +847,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FormType;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateRequired;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Completed;
+        private System.Windows.Forms.Label ReportSelectLabel;
+        private System.Windows.Forms.ComboBox ReportSelectField;
+        private System.Windows.Forms.DataGridView ReportTable;
     }
 }
 

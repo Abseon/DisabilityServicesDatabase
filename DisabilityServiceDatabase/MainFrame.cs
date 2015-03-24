@@ -34,8 +34,8 @@ namespace DisabilityServiceDatabase
             DatabaseRead("Case");
             PopulateNotifications();
             DisplayNotifications();
+            DisplayReports();
             SetInitial();
-            // Temp Sample
         }
 
         // Action Listeners
@@ -444,6 +444,44 @@ namespace DisabilityServiceDatabase
                 }
             }
         }
+        private void DisplayReports()
+        {
+            // Sets up the Reports Table on program start or report select
+            String[] CaseFields = new String[] {"Employee Number","Status", "LTD Eligible", "Referral Recieved", "Sick Leave Start", "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required",
+                            "LTD Application Sent", "Employee Stat to GWL","Benefits Sheet Required","Day 160","Day 181 + 3 Months","Benefits Sheet Sent","Benefits Sheet Recieved","Accomodation Start Date",
+                            "Return to Work","Return to Work Date","Return To Work Follow-Up","RTW Follow-Up Complete","Return To Work End Plan","Accomodation Follow-Up","Number of Days Absent","Hourly Salary",
+                            "Hours Worked/Day","SL Cost/Day"};
+            for (int i = 0;i < CaseFields.Length;i++)
+            {
+                ReportTable.Columns.Add(CaseFields[i], CaseFields[i]);
+            }
+            // Set Default Size of Columns
+            foreach (DataGridViewColumn col in ReportTable.Columns)
+            {
+                col.Width = 80;
+            }
+            // Sample Code
+            String[] SampleFields = new String[26];
+            foreach (DataEntry data in MainDatabase)
+            {
+                if (data.ContainsCaseInfo)
+                {
+                    for (int i = 0; i < 26; i++)
+                    {
+                        if (data.RTWFields[CaseFields[i]] != null)
+                        {
+                            SampleFields[i] = data.RTWFields[CaseFields[i]].ToString();
+                        }
+                        else
+                        {
+                            SampleFields[i] = "";
+                        }
+                    }
+                    ReportTable.Rows.Add(SampleFields);
+                }
+            }
+
+        }
         private void ClearFields()
         {
             foreach (Control Cont in PersonalInformationTable.Controls)
@@ -466,6 +504,12 @@ namespace DisabilityServiceDatabase
             // Sets the initial values of several fields (purely aesthetic)
             SortByField.SelectedIndex = 0;
             ShowExpiredField.SelectedIndex = 0;
+            ReportSelectField.SelectedIndex = 0;
+        }
+
+        private void ReportSelectLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public class DataEntry
