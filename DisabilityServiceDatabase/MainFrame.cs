@@ -26,10 +26,14 @@ namespace DisabilityServiceDatabase
         private Dictionary<String, int> ReferenceTable = new Dictionary<string, int>(); // Change Name?
         // Existing person data
         private DataEntry ExistingPersonReference = null;
+        // Path of database to be connected to
+        private string DatabaseLocation;
 
         public MainFrame()
         {
+            
             InitializeComponent();
+            SetConnectionString();
             DatabaseRead("Employee");
             DatabaseRead("Case");
             PopulateNotifications();
@@ -204,12 +208,32 @@ namespace DisabilityServiceDatabase
             }
         }
         // Custom Functions
+        private void SetConnectionString()
+        {
+            OpenFileDialog ConnectionPrompt = new OpenFileDialog();
+
+            ConnectionPrompt.Filter = "Access Files (*.accdb)|*.accdb|All files (*.*)|*.*";
+            ConnectionPrompt.FilterIndex = 0;
+            ConnectionPrompt.RestoreDirectory = true;
+
+            if (ConnectionPrompt.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    DatabaseLocation = ConnectionPrompt.FileName.ToString();
+                }
+                catch (Exception ex)
+                {
+                    // Re-prompt for input
+                }
+            }
+        }
         private Boolean DatabaseRead(String commandString)
         {
             // Connects to the access database and reads entries into MainDatabase
             // Connect string determines the table to read or a custom command string
             // Returns true on success false on failure
-            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Sean\Documents\DisabilityServicesDatabase.accdb;Persist Security Info=False;"; //Temporarily referencing a static location
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + DatabaseLocation +";Persist Security Info=False;";
             string StringCommand;
             switch (commandString)
             {
@@ -287,7 +311,7 @@ namespace DisabilityServiceDatabase
         private Boolean DatabaseWrite(DataEntry inputEntry)
         {
             // Writes a given inputEntry to the Access Database
-            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Sean\Documents\DisabilityServicesDatabase.accdb;Persist Security Info=False;"; //Temporarily referencing a static location
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + DatabaseLocation + ";Persist Security Info=False;"; //Temporarily referencing a static location
             string EmployeeInsertCommand = "INSERT INTO Employees (";
             string CaseInsertCommand = "INSERT INTO CaseInfo (";
             
