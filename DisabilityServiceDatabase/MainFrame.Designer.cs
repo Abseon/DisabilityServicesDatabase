@@ -674,6 +674,7 @@
             this.NotificationsTable.ShowEditingIcon = false;
             this.NotificationsTable.Size = new System.Drawing.Size(746, 650);
             this.NotificationsTable.TabIndex = 4;
+            this.NotificationsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NotificationsTable_CellContentClicked);
             // 
             // EmployeeName
             // 
@@ -727,6 +728,7 @@
             this.ShowExpiredField.Name = "ShowExpiredField";
             this.ShowExpiredField.Size = new System.Drawing.Size(204, 21);
             this.ShowExpiredField.TabIndex = 2;
+            this.ShowExpiredField.SelectedIndexChanged += new System.EventHandler(this.ShowExpiredField_Changed);
             // 
             // SortByLabel
             // 
@@ -751,7 +753,7 @@
             this.SortByField.Name = "SortByField";
             this.SortByField.Size = new System.Drawing.Size(204, 21);
             this.SortByField.TabIndex = 0;
-            this.SortByField.SelectedIndexChanged += new System.EventHandler(this.SortByField_SelectedIndexChanged);
+            this.SortByField.SelectedIndexChanged += new System.EventHandler(this.SortByField_Changed);
             // 
             // MainFrame
             // 

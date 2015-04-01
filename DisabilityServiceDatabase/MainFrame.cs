@@ -31,13 +31,12 @@ namespace DisabilityServiceDatabase
 
         public MainFrame()
         {
-            
             InitializeComponent();
             SetConnectionString();
-            DatabaseRead("Employee");
-            DatabaseRead("Case");
+            DatabaseRead("Employee");   //Update?
+            DatabaseRead("Case");       //
             PopulateNotifications();
-            DisplayNotifications();
+            DisplayNotifications("Date","None");
             DisplayReports();
             SetInitial();
         }
@@ -184,11 +183,41 @@ namespace DisabilityServiceDatabase
                 }
             }
         }
+        private void SortByField_Changed(object sender, EventArgs e)
+        {
+            RefreshNotifications();
+        }
+        private void ShowExpiredField_Changed(object sender, EventArgs e)
+        {
+            RefreshNotifications();
+        }
+        private void NotificationsTable_CellContentClicked(object sender, DataGridViewCellEventArgs e)
+        {
+            // Update the Notification that in the database and then remove it from notifications
+            if (NotificationsTable.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewCheckBoxCell) // Potentially rewrite or add references to the sorted notifications list to avoid search
+            {
+                Notification ToDelete = null;
+                foreach (Notification NotificationCase in Notifications)
+                {
+                    if (NotificationsTable.Rows[e.RowIndex].Cells[0].Value.ToString() == NotificationCase.EmployeeName && NotificationsTable.Rows[e.RowIndex].Cells[1].Value.ToString() == NotificationCase.NotificationType)// Looks for Name and notification type match
+                    {
+                        ToDelete = NotificationCase;
+                    }
+                    
+                }
+                if (ToDelete != null)
+                {
+                    Notifications.Remove(ToDelete);
+                    RefreshNotifications();
+                }
+            }
+                // TO DO Update database with today's date
+        }
         private void FillExistingPersonSearch()
         {
             // Fills the Existing Person Search Field with the names of people currently in the database
             List<String> FillList = new List<String>();
-            // Resets Reference Table and Sxisting SearchField to be filled 
+            // Resets Reference Table and Existing SearchField to be filled 
             ReferenceTable = new Dictionary<string, int>();
             ExistingPersonSearchField.Items.Clear();
             foreach (DataEntry item in MainDatabase)
@@ -224,7 +253,7 @@ namespace DisabilityServiceDatabase
                 }
                 catch (Exception ex)
                 {
-                    // Re-prompt for input
+                    SetConnectionString();
                 }
             }
         }
@@ -238,10 +267,10 @@ namespace DisabilityServiceDatabase
             switch (commandString)
             {
                 case "Employee":
-                    StringCommand = "SELECT * FROM Employees;";
+                    StringCommand = "SELECT * FROM `Client Contact Information`;";
                     break;
                 case "Case":
-                    StringCommand = "SELECT * FROM CaseInfo;";
+                    StringCommand = "SELECT * FROM Documentation;";
                     break;
                 default:
                     StringCommand = commandString;
@@ -269,8 +298,17 @@ namespace DisabilityServiceDatabase
                     {
                         // Reads the values into a Data Entry - this is order dependent
                         DataEntry ReadEntry = new DataEntry();
-                        String[] EmployeeFields = new String[10] { "Employment Number", "Last Name", "First Name","Street Address","City","Province","Postal Code","Phone Number (Home)","Phone Number (Work)","Email" }; // Consider replacing with reference
-                        for (int i = 0; i < 10; i++)
+                        String[] EmployeeFields = new String[] { "Employment Number", "Last Name", "First Name","Street Address","City","Province","Postal Code","Phone Number (Home)","Phone Number (Work)","Email" }; // Consider replacing with reference
+                        int SetLength;
+                        if (SingleRow.ItemArray.Length < EmployeeFields.Length)
+                        {
+                            SetLength = SingleRow.ItemArray.Length;
+                        }
+                        else
+                        {
+                            SetLength = EmployeeFields.Length;
+                        }
+                        for (int i = 0; i < SetLength; i++)
                         {
                             ReadEntry.PersonalFields[EmployeeFields[i]] = SingleRow.ItemArray[i];
                         }
@@ -284,11 +322,20 @@ namespace DisabilityServiceDatabase
                     {
                         // Reads the values into a Data Entry - this is order dependent
                         DataEntry ReadEntry = new DataEntry();
-                        String[] CaseFields = new String[27] { "ID", "Employee Number","Status", "LTD Eligible", "Referral Recieved", "Sick Leave Start", "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required",
+                        String[] CaseFields = new String[] { "ID", "Employee Number","Status", "LTD Eligible", "Referral Recieved", "Sick Leave Start", "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required",
                             "LTD Application Sent", "Employee Stat to GWL","Benefits Sheet Required","Day 160","Day 181 + 3 Months","Benefits Sheet Sent","Benefits Sheet Recieved","Accomodation Start Date",
                             "Return to Work","Return to Work Date","Return To Work Follow-Up","RTW Follow-Up Complete","Return To Work End Plan","Accomodation Follow-Up","Number of Days Absent","Hourly Salary",
                             "Hours Worked/Day","SL Cost/Day"}; // Consider replacing with reference
-                        for (int i = 0; i < 26 ; i++)
+                        int SetLength;
+                        if (SingleRow.ItemArray.Length < CaseFields.Length)
+                        {
+                            SetLength = SingleRow.ItemArray.Length;
+                        }
+                        else
+                        {
+                            SetLength = CaseFields.Length;
+                        }
+                        for (int i = 0; i < SetLength ; i++)
                         {
                             ReadEntry.RTWFields[CaseFields[i]] = SingleRow.ItemArray[i];
                         }
@@ -303,6 +350,7 @@ namespace DisabilityServiceDatabase
             {
                 // DB should always close
                 DatabaseConnection.Close();
+                MessageBox.Show(ex.Message);
                 Debug.WriteLine(ex.Message); //Should eventually produce a pop-up with retry option
                 return false;
             }
@@ -315,7 +363,7 @@ namespace DisabilityServiceDatabase
             string EmployeeInsertCommand = "INSERT INTO Employees (";
             string CaseInsertCommand = "INSERT INTO CaseInfo (";
             
-            // Writing Insert Command strings !!!
+            // Writing Insert Command strings
             String[] EmployeeFields = new String[10] { "Employment Number", "Last Name", "First Name", "Street Address", "City", "Province", "Postal Code", "Phone Number (Home)", "Phone Number (Work)", "Email" }; // Consider replacing with reference // Also may differ from actual DB
             for (int i = 0; i < EmployeeFields.Length; i++)
             {
@@ -402,6 +450,7 @@ namespace DisabilityServiceDatabase
             {
                 // Make sure to close DB on fail or success
                 DatabaseConnection.Close();
+                MessageBox.Show(ex.Message);
                 Debug.WriteLine(ex.Message); //Should eventually produce a pop-up with retry option
                 return false;
             }
@@ -414,9 +463,12 @@ namespace DisabilityServiceDatabase
             // Separates Employee and case entries
             List<DataEntry> cases = new List<DataEntry>();
             List<DataEntry> employees = new List<DataEntry>();
-            // Set List of Forms
+            // Set List of Forms/notifications to add
             String[] CaseDateFields = new String[] {  "Sick Leave Expiry", "180 Days Follow-Up", "LTD Application Required","Benefits Sheet Required","Day 160","Day 181 + 3 Months",
                             "Return To Work Follow-Up","Return To Work End Plan","Accomodation Follow-Up"};
+            // List of associated dates that show if a form is completed and when (null if no associated form)
+            // Must be equal in length
+            String[] AssociatedCaseFields = new String[] { null, null, "LTD Application Sent", "Benefits Sheet Sent", null, null,"RTW Follow-Up Complete", null, null};
             foreach (DataEntry entry in MainDatabase)
             {   
                 // Assumes only one is true
@@ -443,30 +495,93 @@ namespace DisabilityServiceDatabase
                 } 
                 for (int i = 0; i < CaseDateFields.Length;i++)
                 {
-                    Notification addedNotification = new Notification();
-                    addedNotification.CaseNumber = caseNumber;
-                    if (caseData.RTWFields[CaseDateFields[i]] is DateTime)
+                    if (AssociatedCaseFields[i] == null) // Ignore complete check if there is no associated field
                     {
-                        addedNotification.NotificationDate = (DateTime) caseData.RTWFields[CaseDateFields[i]]; //Bugs if empty due to cast
+                            Notification addedNotification = new Notification();
+                            addedNotification.CaseNumber = caseNumber;
+                            if (caseData.RTWFields[CaseDateFields[i]] is DateTime)
+                            {
+                                addedNotification.NotificationDate = (DateTime)caseData.RTWFields[CaseDateFields[i]]; //Bugs if empty due to cast
+                            }
+                            addedNotification.NotificationType = CaseDateFields[i];
+                            addedNotification.EmployeeName = employeeName;
+                            Notifications.Add(addedNotification);
                     }
-                    addedNotification.NotificationType = CaseDateFields[i];
-                    addedNotification.EmployeeName = employeeName;
-                    Notifications.Add(addedNotification);
+                    else
+                    {
+                        if (caseData.RTWFields[AssociatedCaseFields[i]] == null || caseData.RTWFields[AssociatedCaseFields[i]] is DBNull) // Only add if the associated sent/complete field is null
+                        {
+
+                            Notification addedNotification = new Notification();
+                            addedNotification.CaseNumber = caseNumber;
+                            if (caseData.RTWFields[CaseDateFields[i]] is DateTime)
+                            {
+                                addedNotification.NotificationDate = (DateTime)caseData.RTWFields[CaseDateFields[i]]; //Bugs if empty due to cast
+                            }
+                            addedNotification.NotificationType = CaseDateFields[i];
+                            addedNotification.EmployeeName = employeeName;
+                            Notifications.Add(addedNotification);
+                        }
+                    }
                 }
 
             }
         }
-        private void DisplayNotifications()
+        private void DisplayNotifications(string SortBy,String CutOffDate)
         {
             // Takes the Given Notifications List and Fills the Notification Table
-            List<Notification> SortedNotifications = Notifications.OrderBy(a => a.NotificationDate).ToList<Notification>();
+            // Switch allows for sort by different aspects
+            List<Notification> SortedNotifications;
+            switch (SortBy)
+            {
+                case "Name":
+                    SortedNotifications = Notifications.OrderBy(a => a.EmployeeName).ToList<Notification>();
+                    break;
+                case "Form":
+                    SortedNotifications = Notifications.OrderBy(a => a.NotificationType).ToList<Notification>();
+                    break;
+                case "Date":
+                    SortedNotifications = Notifications.OrderBy(a => a.NotificationDate).ToList<Notification>();
+                    break;
+                default:
+                    SortedNotifications = Notifications.OrderBy(a => a.NotificationDate).ToList<Notification>();
+                    break;
+
+            }
+            DateTime SortDate;
+            // Chooses the cut off date Note: this will not change until refreshed
+            switch (CutOffDate)
+            {
+                case "None":
+                    SortDate = DateTime.Today;
+                    break;
+                case "Last Week":
+                    SortDate = DateTime.Today.AddDays(-7);
+                    break;
+                case "Last 3 Weeks":
+                    SortDate = DateTime.Today.AddDays(-21);
+                    break;
+                case "Last Month":
+                    SortDate = DateTime.Today.AddMonths(-1);
+                    break;
+                case "All":
+                    SortDate = DateTime.MinValue;
+                    break;
+                default:
+                    SortDate = DateTime.Today;
+                    break;
+            }
             foreach (Notification FormDate in SortedNotifications)
             {
-                if (FormDate.NotificationDate > DateTime.Today)
+                if (FormDate.NotificationDate > SortDate)
                 {
-                    NotificationsTable.Rows.Add(FormDate.EmployeeName, FormDate.NotificationType, FormDate.NotificationDate.ToShortDateString());
+                    NotificationsTable.Rows.Add(FormDate.EmployeeName, FormDate.NotificationType, FormDate.NotificationDate.ToShortDateString(),false);
                 }
             }
+        }
+        private void ClearNotifications()
+        {
+            NotificationsTable.Rows.Clear();
         }
         private void DisplayReports()
         {
@@ -530,11 +645,28 @@ namespace DisabilityServiceDatabase
             ShowExpiredField.SelectedIndex = 0;
             ReportSelectField.SelectedIndex = 0;
         }
-
+        private void RefreshNotifications()
+        {
+            // Clear and update notifications table
+            ClearNotifications();
+            if (SortByField.SelectedItem == null)
+            {
+                DisplayNotifications("Date", ShowExpiredField.SelectedItem.ToString());
+            }
+            else if (ShowExpiredField.SelectedItem == null)
+            {
+                DisplayNotifications(SortByField.SelectedItem.ToString(), "None");
+            }
+            else
+            {
+                DisplayNotifications(SortByField.SelectedItem.ToString(), ShowExpiredField.SelectedItem.ToString());
+            }
+        }
         private void ReportSelectLabel_Click(object sender, EventArgs e)
         {
 
         }
+
     }
     public class DataEntry
     {
