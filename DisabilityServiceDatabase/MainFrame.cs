@@ -45,7 +45,7 @@ namespace DisabilityServiceDatabase
         private void ReferralRecievedLabel_Click(object sender, EventArgs e)
         {
 
-        }
+        } // UNUSED REMOVE
         private void ExistingPersonButton_Click(object sender, EventArgs e)
         {
             // Switches from Personal Input to an existing person search
@@ -63,7 +63,7 @@ namespace DisabilityServiceDatabase
             // On submit button press all entered data is added as a DataEntry object to AddedEntries
             DataEntry NewEntry = new DataEntry();
             int test;
-            if ((EmployeeNumberField.Text != "" && Int32.TryParse(EmployeeNumberField.Text,out test)) || ExistingPerson)
+            if ((EmployeeNumberField.Text != "" && Int32.TryParse(EmployeeNumberField.Text, out test)) || (ExistingPerson && ExistingPersonReference != null))
             {
                 // Potentially find a better way to fill these
                 if (ExistingPerson && ExistingPersonReference != null ) {
@@ -81,7 +81,7 @@ namespace DisabilityServiceDatabase
                     NewEntry.RTWFields["Employee Number"] = ExistingPersonReference.PersonalFields["Employment Number"];
                     NewEntry.ExistingPerson = true;
                 }
-                else
+                else 
                 {
                     NewEntry.PersonalFields["Employment Number"] = Int32.Parse(EmployeeNumberField.Text);
                     NewEntry.PersonalFields["First Name"] = FirstNameField.Text;
@@ -162,7 +162,7 @@ namespace DisabilityServiceDatabase
         private void SortByLabel_Click(object sender, EventArgs e)
         {
 
-        }
+        } // UNUSED REMOVE
         private void SortByField_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -213,50 +213,7 @@ namespace DisabilityServiceDatabase
             }
                 // TO DO Update database with today's date
         }
-        private void FillExistingPersonSearch()
-        {
-            // Fills the Existing Person Search Field with the names of people currently in the database
-            List<String> FillList = new List<String>();
-            // Resets Reference Table and Existing SearchField to be filled 
-            ReferenceTable = new Dictionary<string, int>();
-            ExistingPersonSearchField.Items.Clear();
-            foreach (DataEntry item in MainDatabase)
-            {
-                if (item.ContainsPersonalInfo)
-                {
-                    String FillString = item.PersonalFields["Last Name"].ToString() + "," + item.PersonalFields["First Name"].ToString();
-                    FillList.Add(FillString);
-                    ReferenceTable.Add(FillString, Convert.ToInt32(item.PersonalFields["Employment Number"])); // Note potential error if not convertable !!!
-
-                }
-            }
-            FillList.Sort();
-            foreach (String name in FillList)
-            {
-                ExistingPersonSearchField.Items.Add(name);
-            }
-        }
-        // Custom Functions
-        private void SetConnectionString()
-        {
-            OpenFileDialog ConnectionPrompt = new OpenFileDialog();
-
-            ConnectionPrompt.Filter = "Access Files (*.accdb)|*.accdb|All files (*.*)|*.*";
-            ConnectionPrompt.FilterIndex = 0;
-            ConnectionPrompt.RestoreDirectory = true;
-
-            if (ConnectionPrompt.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    DatabaseLocation = ConnectionPrompt.FileName.ToString();
-                }
-                catch (Exception ex)
-                {
-                    SetConnectionString();
-                }
-            }
-        }
+        // Database Access Functions
         private Boolean DatabaseRead(String commandString)
         {
             // Connects to the access database and reads entries into MainDatabase
@@ -455,6 +412,50 @@ namespace DisabilityServiceDatabase
                 return false;
             }
         }
+        // Custom Functions
+        private void FillExistingPersonSearch()
+        {
+            // Fills the Existing Person Search Field with the names of people currently in the database
+            List<String> FillList = new List<String>();
+            // Resets Reference Table and Existing SearchField to be filled 
+            ReferenceTable = new Dictionary<string, int>();
+            ExistingPersonSearchField.Items.Clear();
+            foreach (DataEntry item in MainDatabase)
+            {
+                if (item.ContainsPersonalInfo)
+                {
+                    String FillString = item.PersonalFields["Last Name"].ToString() + "," + item.PersonalFields["First Name"].ToString();
+                    FillList.Add(FillString);
+                    ReferenceTable.Add(FillString, Convert.ToInt32(item.PersonalFields["Employment Number"])); // Note potential error if not convertable !!!
+
+                }
+            }
+            FillList.Sort();
+            foreach (String name in FillList)
+            {
+                ExistingPersonSearchField.Items.Add(name);
+            }
+        }
+        private void SetConnectionString()
+        {
+            OpenFileDialog ConnectionPrompt = new OpenFileDialog();
+
+            ConnectionPrompt.Filter = "Access Files (*.accdb)|*.accdb|All files (*.*)|*.*";
+            ConnectionPrompt.FilterIndex = 0;
+            ConnectionPrompt.RestoreDirectory = true;
+
+            if (ConnectionPrompt.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    DatabaseLocation = ConnectionPrompt.FileName.ToString();
+                }
+                catch (Exception ex)
+                {
+                    SetConnectionString();
+                }
+            }
+        }
         private void PopulateNotifications()
         {
             // Takes the inputted MainDatabase and populates a list of Notification object 
@@ -553,7 +554,7 @@ namespace DisabilityServiceDatabase
             switch (CutOffDate)
             {
                 case "None":
-                    SortDate = DateTime.Today;
+                    SortDate = DateTime.Today.AddDays(-1); // Include the current date
                     break;
                 case "Last Week":
                     SortDate = DateTime.Today.AddDays(-7);
@@ -665,7 +666,7 @@ namespace DisabilityServiceDatabase
         private void ReportSelectLabel_Click(object sender, EventArgs e)
         {
 
-        }
+        } //UNUSED REMOVE
 
     }
     public class DataEntry

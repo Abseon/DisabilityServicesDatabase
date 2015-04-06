@@ -32,12 +32,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrame));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTab = new System.Windows.Forms.TabControl();
             this.DataEntryTab = new System.Windows.Forms.TabPage();
             this.PublishButton = new System.Windows.Forms.Button();
@@ -94,7 +88,6 @@
             this.ShowExpiredField = new System.Windows.Forms.ComboBox();
             this.SortByLabel = new System.Windows.Forms.Label();
             this.SortByField = new System.Windows.Forms.ComboBox();
-            this.menuStrip1.SuspendLayout();
             this.MainTab.SuspendLayout();
             this.DataEntryTab.SuspendLayout();
             this.RTWInformationTable.SuspendLayout();
@@ -105,61 +98,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.NotificationsTable)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.documentationToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // documentationToolStripMenuItem
-            // 
-            this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
-            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.documentationToolStripMenuItem.Text = "Documentation";
-            // 
             // MainTab
             // 
             this.MainTab.Controls.Add(this.DataEntryTab);
             this.MainTab.Controls.Add(this.ReportsTab);
             this.MainTab.Controls.Add(this.NotificationsTab);
-            this.MainTab.Location = new System.Drawing.Point(12, 27);
+            this.MainTab.Location = new System.Drawing.Point(12, 12);
             this.MainTab.Name = "MainTab";
             this.MainTab.SelectedIndex = 0;
-            this.MainTab.Size = new System.Drawing.Size(1160, 722);
+            this.MainTab.Size = new System.Drawing.Size(1160, 737);
             this.MainTab.TabIndex = 1;
             // 
             // DataEntryTab
@@ -175,7 +122,7 @@
             this.DataEntryTab.Location = new System.Drawing.Point(4, 22);
             this.DataEntryTab.Name = "DataEntryTab";
             this.DataEntryTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DataEntryTab.Size = new System.Drawing.Size(1152, 696);
+            this.DataEntryTab.Size = new System.Drawing.Size(1152, 711);
             this.DataEntryTab.TabIndex = 0;
             this.DataEntryTab.Text = "Data Entry";
             this.DataEntryTab.UseVisualStyleBackColor = true;
@@ -605,7 +552,7 @@
             this.ReportsTab.Location = new System.Drawing.Point(4, 22);
             this.ReportsTab.Name = "ReportsTab";
             this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ReportsTab.Size = new System.Drawing.Size(1152, 696);
+            this.ReportsTab.Size = new System.Drawing.Size(1152, 711);
             this.ReportsTab.TabIndex = 1;
             this.ReportsTab.Text = "Reports";
             this.ReportsTab.UseVisualStyleBackColor = true;
@@ -615,9 +562,9 @@
             this.ReportSelectLabel.AutoSize = true;
             this.ReportSelectLabel.Location = new System.Drawing.Point(1033, 27);
             this.ReportSelectLabel.Name = "ReportSelectLabel";
-            this.ReportSelectLabel.Size = new System.Drawing.Size(66, 13);
+            this.ReportSelectLabel.Size = new System.Drawing.Size(72, 13);
             this.ReportSelectLabel.TabIndex = 3;
-            this.ReportSelectLabel.Text = "Report Type";
+            this.ReportSelectLabel.Text = "Report Select";
             this.ReportSelectLabel.Click += new System.EventHandler(this.ReportSelectLabel_Click);
             // 
             // ReportSelectField
@@ -652,7 +599,7 @@
             this.NotificationsTab.Controls.Add(this.SortByField);
             this.NotificationsTab.Location = new System.Drawing.Point(4, 22);
             this.NotificationsTab.Name = "NotificationsTab";
-            this.NotificationsTab.Size = new System.Drawing.Size(1152, 696);
+            this.NotificationsTab.Size = new System.Drawing.Size(1152, 711);
             this.NotificationsTab.TabIndex = 2;
             this.NotificationsTab.Text = "Notifications";
             this.NotificationsTab.UseVisualStyleBackColor = true;
@@ -672,7 +619,7 @@
             this.NotificationsTable.Location = new System.Drawing.Point(34, 14);
             this.NotificationsTable.Name = "NotificationsTable";
             this.NotificationsTable.ShowEditingIcon = false;
-            this.NotificationsTable.Size = new System.Drawing.Size(746, 650);
+            this.NotificationsTable.Size = new System.Drawing.Size(772, 650);
             this.NotificationsTable.TabIndex = 4;
             this.NotificationsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NotificationsTable_CellContentClicked);
             // 
@@ -695,7 +642,7 @@
             this.DateRequired.HeaderText = "Date Required By";
             this.DateRequired.Name = "DateRequired";
             this.DateRequired.ReadOnly = true;
-            this.DateRequired.Width = 250;
+            this.DateRequired.Width = 245;
             // 
             // Completed
             // 
@@ -761,14 +708,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 761);
             this.Controls.Add(this.MainTab);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainFrame";
             this.Text = "Disability Services Database";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.MainTab.ResumeLayout(false);
             this.DataEntryTab.ResumeLayout(false);
             this.DataEntryTab.PerformLayout();
@@ -783,19 +726,11 @@
             this.NotificationsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NotificationsTable)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
         private System.Windows.Forms.TabControl MainTab;
         private System.Windows.Forms.TabPage DataEntryTab;
         private System.Windows.Forms.TabPage ReportsTab;
@@ -845,13 +780,13 @@
         private System.Windows.Forms.Label ShowExpiredLabel;
         private System.Windows.Forms.ComboBox ShowExpiredField;
         private System.Windows.Forms.DataGridView NotificationsTable;
+        private System.Windows.Forms.Label ReportSelectLabel;
+        private System.Windows.Forms.ComboBox ReportSelectField;
+        private System.Windows.Forms.DataGridView ReportTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FormType;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateRequired;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Completed;
-        private System.Windows.Forms.Label ReportSelectLabel;
-        private System.Windows.Forms.ComboBox ReportSelectField;
-        private System.Windows.Forms.DataGridView ReportTable;
     }
 }
 
