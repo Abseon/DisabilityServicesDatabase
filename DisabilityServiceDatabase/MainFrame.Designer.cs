@@ -255,7 +255,6 @@
             this.ReferralReceivedLabel.Size = new System.Drawing.Size(93, 13);
             this.ReferralReceivedLabel.TabIndex = 24;
             this.ReferralReceivedLabel.Text = "Referral Received";
-            this.ReferralReceivedLabel.Click += new System.EventHandler(this.ReferralRecievedLabel_Click);
             // 
             // HourlySalaryField
             // 
@@ -565,7 +564,6 @@
             this.ReportSelectLabel.Size = new System.Drawing.Size(72, 13);
             this.ReportSelectLabel.TabIndex = 3;
             this.ReportSelectLabel.Text = "Report Select";
-            this.ReportSelectLabel.Click += new System.EventHandler(this.ReportSelectLabel_Click);
             // 
             // ReportSelectField
             // 
@@ -685,7 +683,6 @@
             this.SortByLabel.Size = new System.Drawing.Size(41, 13);
             this.SortByLabel.TabIndex = 1;
             this.SortByLabel.Text = "Sort By";
-            this.SortByLabel.Click += new System.EventHandler(this.SortByLabel_Click);
             // 
             // SortByField
             // 

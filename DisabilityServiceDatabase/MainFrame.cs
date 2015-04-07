@@ -23,7 +23,7 @@ namespace DisabilityServiceDatabase
         // Boolean representing the status of data entry, defaults to false for !existingPerson
         Boolean ExistingPerson = false;
         // Reference list translating a Last Name, First Name String to an employee number used by ExistingSearch
-        private Dictionary<String, int> ReferenceTable = new Dictionary<string, int>(); // Change Name?
+        private Dictionary<String, int> ReferenceTable = new Dictionary<string, int>(); 
         // Existing person data
         private DataEntry ExistingPersonReference = null;
         // Path of database to be connected to
@@ -33,8 +33,8 @@ namespace DisabilityServiceDatabase
         {
             InitializeComponent();
             SetConnectionString();
-            DatabaseRead("Employee");   //Update?
-            DatabaseRead("Case");       //
+            DatabaseRead("Employee");   
+            DatabaseRead("Case");      
             PopulateNotifications();
             DisplayNotifications("Date","None");
             DisplayReports();
@@ -42,10 +42,6 @@ namespace DisabilityServiceDatabase
         }
 
         // Action Listeners
-        private void ReferralRecievedLabel_Click(object sender, EventArgs e)
-        {
-
-        } // UNUSED REMOVE
         private void ExistingPersonButton_Click(object sender, EventArgs e)
         {
             // Switches from Personal Input to an existing person search
@@ -62,7 +58,7 @@ namespace DisabilityServiceDatabase
         {
             // On submit button press all entered data is added as a DataEntry object to AddedEntries
             DataEntry NewEntry = new DataEntry();
-            int test;
+            int test; //Used to test if the employee number is valid
             if ((EmployeeNumberField.Text != "" && Int32.TryParse(EmployeeNumberField.Text, out test)) || (ExistingPerson && ExistingPersonReference != null))
             {
                 // Potentially find a better way to fill these
@@ -134,7 +130,15 @@ namespace DisabilityServiceDatabase
             }
             else
             {
-                // TO DO: ERROR TEXT BOX as employee # is critical
+                if (ExistingPerson)
+                {
+                    MessageBox.Show("Please select an employee");
+                }
+                else
+                {
+                    MessageBox.Show("Entered Employee number must be a number");
+                }
+                
             }
         }
         private void PublishButton_Click(object sender, EventArgs e)
@@ -158,14 +162,6 @@ namespace DisabilityServiceDatabase
                 PublishButton.Visible = false;
             }
             
-        }
-        private void SortByLabel_Click(object sender, EventArgs e)
-        {
-
-        } // UNUSED REMOVE
-        private void SortByField_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
         private void ExistingPersonSearchField_Changed(object sender, EventArgs e)
         {
@@ -207,11 +203,24 @@ namespace DisabilityServiceDatabase
                 }
                 if (ToDelete != null)
                 {
+                    // Update database with today's date
+                    Dictionary<String,String> AssociatedFieldsLookup = new Dictionary<String,String>() { 
+                        {"Sick Leave Expiry",null}, {"180 Days Follow-Up",null}, {"LTD Application Required","LTD Application Sent"},
+                        {"Benefits Sheet Required","Benefits Sheet Sent"},{"Day 160",null},{"Day 181 + 3 Months",null},{"Return To Work Follow-Up","RTW Follow-Up Complete"},
+                        {"Return To Work End Plan",null},{"Accomodation Follow-Up",null} 
+                    };
+                    String AssociatedType = AssociatedFieldsLookup[ToDelete.NotificationType];
+                    if (AssociatedType != null)
+                    {
+                        DatabaseUpdate("Documentation", "`" + AssociatedType + "`", "\"" + DateTime.Today.ToShortDateString() + "\"", "ID", ToDelete.CaseNumber.ToString());
+                    }
                     Notifications.Remove(ToDelete);
                     RefreshNotifications();
                 }
+                
+
             }
-                // TO DO Update database with today's date
+            
         }
         // Database Access Functions
         private Boolean DatabaseRead(String commandString)
@@ -308,17 +317,23 @@ namespace DisabilityServiceDatabase
                 // DB should always close
                 DatabaseConnection.Close();
                 MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message); //Should eventually produce a pop-up with retry option
-                return false;
+                if (MessageBox.Show("Error occurred in Database Connect", "Retry?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                {
+                    return DatabaseRead(commandString);
+                }
+                else
+                {
+                    return false;
+                }
             }
             
         }
         private Boolean DatabaseWrite(DataEntry inputEntry)
         {
             // Writes a given inputEntry to the Access Database
-            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + DatabaseLocation + ";Persist Security Info=False;"; //Temporarily referencing a static location
-            string EmployeeInsertCommand = "INSERT INTO Employees (";
-            string CaseInsertCommand = "INSERT INTO CaseInfo (";
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + DatabaseLocation + ";Persist Security Info=False;";
+            string EmployeeInsertCommand = "INSERT INTO `Client Contact Information` (";
+            string CaseInsertCommand = "INSERT INTO Documentation (";
             
             // Writing Insert Command strings
             String[] EmployeeFields = new String[10] { "Employment Number", "Last Name", "First Name", "Street Address", "City", "Province", "Postal Code", "Phone Number (Home)", "Phone Number (Work)", "Email" }; // Consider replacing with reference // Also may differ from actual DB
@@ -408,8 +423,44 @@ namespace DisabilityServiceDatabase
                 // Make sure to close DB on fail or success
                 DatabaseConnection.Close();
                 MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message); //Should eventually produce a pop-up with retry option
-                return false;
+                if (MessageBox.Show("Error occurred in Database Connect", "Retry?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                {
+                    return DatabaseWrite(inputEntry);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        private Boolean DatabaseUpdate(String tableName, String updatedField, String updatedValue, String searchField, String searchValue)
+        {
+            // Provides the ability to update a table with a given field value based on search values
+            // Note provided string values must have the surrounding "" quotes
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + DatabaseLocation + ";Persist Security Info=False;";
+            string UpdateCommandString = "UPDATE " + tableName + " SET " + updatedField + "=" + updatedValue + " WHERE " + searchField + "=" + searchValue + ";";
+            OleDbConnection DatabaseConnection = new OleDbConnection(ConnectionString);
+            OleDbCommand UpdateCommand = new OleDbCommand(UpdateCommandString, DatabaseConnection);
+            try
+            {
+                DatabaseConnection.Open();
+                UpdateCommand.ExecuteNonQuery();
+                DatabaseConnection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Make sure to close DB on fail or success
+                DatabaseConnection.Close();
+                MessageBox.Show(ex.Message);
+                if (MessageBox.Show("Error occurred in Database Connect", "Retry?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                {
+                    return DatabaseUpdate(tableName, updatedField, updatedValue, searchField, searchValue);
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         // Custom Functions
@@ -663,10 +714,6 @@ namespace DisabilityServiceDatabase
                 DisplayNotifications(SortByField.SelectedItem.ToString(), ShowExpiredField.SelectedItem.ToString());
             }
         }
-        private void ReportSelectLabel_Click(object sender, EventArgs e)
-        {
-
-        } //UNUSED REMOVE
 
     }
     public class DataEntry
