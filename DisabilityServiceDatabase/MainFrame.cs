@@ -28,6 +28,8 @@ namespace DisabilityServiceDatabase
         private DataEntry ExistingPersonReference = null;
         // Path of database to be connected to
         private string DatabaseLocation;
+        // Existing Employee List for refilling the combo box after text is entered
+        private List<string> ExistingEmployees = new List<string>();
 
         public MainFrame()
         {
@@ -165,6 +167,7 @@ namespace DisabilityServiceDatabase
         }
         private void ExistingPersonSearchField_Changed(object sender, EventArgs e)
         {
+            Debug.WriteLine("Enter");
             // On Person select switch the Existing Person reference
             String CurrentPerson = ExistingPersonSearchField.SelectedItem.ToString();
             int SearchID = ReferenceTable[CurrentPerson];
@@ -178,6 +181,37 @@ namespace DisabilityServiceDatabase
                     }
                 }
             }
+        }
+        private void ExistingPersonSearchField_TextUpdate(object sender, EventArgs e)
+        {
+            // Reset the Reference as a value may not be a employee
+            ExistingPersonReference = null;
+            // Refresh before removing
+            ExistingPersonSearchField.Items.Clear();
+            foreach (String ExistingName in ExistingEmployees)
+            {
+                ExistingPersonSearchField.Items.Add(ExistingName);
+            }
+            //  Resets the cursor
+            ExistingPersonSearchField.SelectionStart = ExistingPersonSearchField.Text.Length;
+            // Update List to only contain names with the text in the text box
+            String NewText = ExistingPersonSearchField.Text;
+            List<String> ToRemove = new List<String>();
+            if (NewText != "")
+            {
+                foreach (String EmployeeName in ExistingPersonSearchField.Items)
+                {
+                    if (!EmployeeName.Contains(NewText))
+                    {
+                        ToRemove.Add(EmployeeName);
+                    }
+                }
+            }
+            foreach (String RemovedName in ToRemove)
+            {
+                ExistingPersonSearchField.Items.Remove(RemovedName);
+            }
+
         }
         private void SortByField_Changed(object sender, EventArgs e)
         {
@@ -482,9 +516,10 @@ namespace DisabilityServiceDatabase
                 }
             }
             FillList.Sort();
-            foreach (String name in FillList)
+            foreach (String Name in FillList)
             {
-                ExistingPersonSearchField.Items.Add(name);
+                ExistingPersonSearchField.Items.Add(Name);
+                ExistingEmployees.Add(Name);
             }
         }
         private void SetConnectionString()
