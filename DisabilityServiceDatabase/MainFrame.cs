@@ -167,7 +167,6 @@ namespace DisabilityServiceDatabase
         }
         private void ExistingPersonSearchField_Changed(object sender, EventArgs e)
         {
-            Debug.WriteLine("Enter");
             // On Person select switch the Existing Person reference
             String CurrentPerson = ExistingPersonSearchField.SelectedItem.ToString();
             int SearchID = ReferenceTable[CurrentPerson];
@@ -516,6 +515,7 @@ namespace DisabilityServiceDatabase
                 }
             }
             FillList.Sort();
+            ExistingEmployees.Clear();
             foreach (String Name in FillList)
             {
                 ExistingPersonSearchField.Items.Add(Name);
